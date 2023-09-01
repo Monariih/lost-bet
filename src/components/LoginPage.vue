@@ -1,0 +1,131 @@
+<template>
+  <v-main
+    class="bg-grey-darken-4 h-100"
+  >
+    <v-container>
+      <v-row>
+        <v-col>
+          <v-img
+            width="200"
+            src="src/assets/logoSemFundoDeitada.png"
+            class="mx-auto"
+          >
+          </v-img>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-spacer>
+
+          </v-spacer>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          class="mx-auto"
+        >
+          <v-card
+            class="bg-grey-darken-3 elevation-2"
+          >
+            <v-card-title>
+              LOGIN
+            </v-card-title>
+            <v-card-item
+              class="my-2"
+            >
+              <v-form
+                v-model="form"
+                @submit.prevent="onSubmit"
+              >
+                <v-text-field
+                  v-model="email"
+                  :readonly="loading"
+                  :rules="[required]"
+                  class="my-2"
+                  clearable
+                  variant="outlined"
+                  label="Email"
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="password"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show1 ? 'text' : 'password'"
+                  :readonly="loading"
+                  :rules="[required]"
+                  type="password"
+                  clearable
+                  variant="outlined"
+                  label="Password"
+                  placeholder="Enter your password"
+                  @click:append="show1 = !show1"
+                ></v-text-field>
+
+                <br>
+
+                <v-btn
+                  :disabled="!form"
+                  :loading="loading"
+                  block
+                  color="success"
+                  size="large"
+                  type="submit"
+                  variant="elevated"
+                >
+                  Sign In
+                </v-btn>
+              </v-form>
+            </v-card-item>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
+  <v-footer
+    class="bg-grey-darken-4"
+  >
+    <v-container>
+      <v-row>
+        <v-col>
+          LUCAS MONARI - 30146470
+        </v-col>
+        <v-col>
+          GABRIEL VIANNA - 29604745
+        </v-col>
+        <v-col>
+          DOUGLAS ZUCOLOTTO - 29708672
+        </v-col>
+        <v-col>
+          JOSE JUNIOR - 29685729
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-footer>
+</template>
+<script>
+export default {
+  data: () => ({
+    form: false,
+    email: null,
+    password: null,
+    loading: false,
+    show1: false,
+    show2: true,
+  }),
+
+  methods: {
+    onSubmit () {
+      if (!this.form) return
+
+      this.loading = true
+
+      console.log(this.email, this.password)
+
+      setTimeout(() => (this.loading = false), 2000)
+    },
+    required (v) {
+      return !!v || 'Field is required'
+    },
+  },
+}
+</script>
