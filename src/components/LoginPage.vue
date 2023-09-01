@@ -22,10 +22,10 @@
       </v-row>
       <v-row>
         <v-col
-          class="mx-auto"
+          class="mx-auto text-center"
         >
           <v-card
-            class="bg-grey-darken-3 elevation-2"
+            class="bg-grey-darken-3 elevation-2 w-50 mx-auto"
           >
             <v-card-title>
               LOGIN
@@ -53,7 +53,6 @@
                   :type="show1 ? 'text' : 'password'"
                   :readonly="loading"
                   :rules="[required]"
-                  type="password"
                   clearable
                   variant="outlined"
                   label="Password"
@@ -61,6 +60,23 @@
                   @click:append="show1 = !show1"
                 ></v-text-field>
 
+                <br>
+                <v-row>
+                  <v-col
+                    class="transparent"
+                  >
+                  <!--
+                    <router-link
+                      to="/forgot-password"
+                      class="flex text-blue"      
+                    >
+                        Esqueçeu sua senha? clique aqui.
+                    </router-link>
+                  -->
+                  </v-col>
+                </v-row>
+                
+                
                 <br>
 
                 <v-btn
@@ -77,6 +93,26 @@
               </v-form>
             </v-card-item>
           </v-card>
+        </v-col>
+      </v-row>
+      <v-row
+        class="mt-15"
+      >
+      <v-col>
+        <v-spacer></v-spacer>
+      </v-col>
+        <v-col
+          class="text-center"
+        >
+          <v-btn
+            class="bg-orange-darken-2"
+          >
+            Ainda não a sua conta LOST-ALL?<br>
+            Crie uma!
+          </v-btn>
+        </v-col>
+        <v-col>
+          <v-spacer></v-spacer>
         </v-col>
       </v-row>
     </v-container>
