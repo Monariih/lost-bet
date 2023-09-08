@@ -25,7 +25,7 @@
           class="mx-auto text-center"
         >
           <v-card
-            class="bg-grey-darken-3 elevation-2 w-50 mx-auto"
+            class="bg-grey-darken-3 elevation-2"
           >
             <v-card-title>
               LOGIN
@@ -65,14 +65,14 @@
                   <v-col
                     class="transparent"
                   >
-                  <!--
+                  
                     <router-link
                       to="/forgot-password"
                       class="flex text-blue"      
                     >
                         Esqueçeu sua senha? clique aqui.
                     </router-link>
-                  -->
+                  
                   </v-col>
                 </v-row>
                 
@@ -117,29 +117,15 @@
       </v-row>
     </v-container>
   </v-main>
-  <v-footer
-    class="bg-grey-darken-4"
-  >
-    <v-container>
-      <v-row>
-        <v-col>
-          LUCAS MONARI - 30146470
-        </v-col>
-        <v-col>
-          GABRIEL VIANNA - 29604745
-        </v-col>
-        <v-col>
-          DOUGLAS ZUCOLOTTO - 29708672
-        </v-col>
-        <v-col>
-          JOSE JUNIOR - 29685729
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-footer>
+  <Footer />
 </template>
 <script>
+import Footer from '@/components/Footer.vue'
+
 export default {
+  components: {
+    Footer,
+  },
   data: () => ({
     form: false,
     email: null,
