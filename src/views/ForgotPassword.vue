@@ -25,10 +25,17 @@
       </v-row>
       <v-row>
         <v-col
-          class="mx-auto text-center"
+          class="text-center"
+          ssm="12"
+          sm="8"
+          md="6"
+          lg="6"
+          offset-sm="2"
+          offset-md="3"
+          offset-lg="3"
         >
           <v-card
-            class="bg-grey-darken-3 elevation-2 w-50 mx-auto"
+            class="bg-grey-darken-3 elevation-2"
           >
             <v-card-title>
               Esqueçeu a senha ?
@@ -45,29 +52,32 @@
               >
                 <v-text-field
                   v-model="email"
-                  type="email"
+                  density="compact"
+                  prepend-inner-icon="mdi-email-outline"
                   :readonly="loading"
                   :rules="[required]"
                   class="my-2"
                   clearable
                   variant="outlined"
-                  label="Email"
+                  placeholder="Email"
                 ></v-text-field>
                 <v-text-field
                   v-model="cpf"
+                  density="compact"
+                  prepend-inner-icon="mdi-receipt-outline"
                   :readonly="loading"
                   :rules="[required]"
                   class="my-2"
                   clearable
                   variant="outlined"
-                  label="CPF"
+                  placeholder="CPF"
                 ></v-text-field>
                 <v-btn
                   :loading="loading"
                   :disabled="loading"
                   type="submit"
                   class="my-2"
-                  color="primary"
+                  color="success"
                   block
                 >
                   Enviar

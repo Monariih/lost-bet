@@ -22,7 +22,14 @@
       </v-row>
       <v-row>
         <v-col
-          class="mx-auto text-center"
+          class="text-center"
+          ssm="12"
+          sm="8"
+          md="6"
+          lg="6"
+          offset-sm="2"
+          offset-md="3"
+          offset-lg="3"
         >
           <v-card
             class="bg-grey-darken-3 elevation-2"
@@ -39,25 +46,26 @@
               >
                 <v-text-field
                   v-model="email"
+                  density="compact"
+                  prepend-inner-icon="mdi-email-outline"
                   :readonly="loading"
                   :rules="[required]"
                   class="my-2"
                   clearable
                   variant="outlined"
-                  label="Email"
+                  placeholder="Enter your email"
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="password"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show1 ? 'text' : 'password'"
-                  :readonly="loading"
-                  :rules="[required]"
-                  clearable
-                  variant="outlined"
-                  label="Password"
-                  placeholder="Enter your password"
-                  @click:append="show1 = !show1"
+                :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                :type="visible ? 'text' : 'password'"
+                :readonly="loading"
+                :rules="[required]"
+                density="compact"
+                placeholder="Enter your password"
+                prepend-inner-icon="mdi-lock-outline"
+                variant="outlined"
+                @click:append-inner="visible = !visible"
                 ></v-text-field>
 
                 <br>
@@ -106,6 +114,7 @@
         >
           <v-btn
             class="bg-orange-darken-2"
+            to="/create-user"
           >
             Ainda não a sua conta LOST-ALL?<br>
             Crie uma!
@@ -131,8 +140,7 @@ export default {
     email: null,
     password: null,
     loading: false,
-    show1: false,
-    show2: true,
+    visible: false,
   }),
 
   methods: {
