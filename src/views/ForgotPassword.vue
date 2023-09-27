@@ -1,6 +1,6 @@
 <template>
   <v-main
-    class="bg-grey-darken-4 h-100"
+    class="bg-grey-darken-3 h-100"
   >
     <v-container>
       <v-row>
@@ -35,7 +35,7 @@
           offset-lg="3"
         >
           <v-card
-            class="bg-grey-darken-3 elevation-2"
+            class="bg-grey-darken-4 elevation-2"
           >
             <v-card-title>
               Esqueçeu a senha ?

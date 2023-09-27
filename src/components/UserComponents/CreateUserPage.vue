@@ -1,5 +1,5 @@
 <template>
-  <v-main class="bg-grey-darken-4 h-100">
+  <v-main class="bg-grey-darken-3 h-100">
     <v-container>
       <v-row>
         <v-col>
@@ -27,7 +27,7 @@
           offset-md="3"
           offset-lg="3"
         >
-          <v-card class="bg-grey-darken-3 elevation-2">
+          <v-card class="bg-grey-darken-4 elevation-2">
             <v-card-title> LOGIN </v-card-title>
             <v-card-item class="my-2">
               <v-form v-model="form" @submit.prevent="onSubmit">
@@ -79,7 +79,7 @@
                   @click:append-inner="visible = !visible"
                 ></v-text-field>
 
-                <v-text-field
+                <!-- <v-text-field
                   :readonly="loading"
                   :rules="[required]"
                   v-model="userAge"
@@ -88,7 +88,7 @@
                   prepend-inner-icon="mdi-check-circle-outline"
                   variant="outlined"
                   @click:append-inner="visible = !visible"
-                ></v-text-field>
+                ></v-text-field> -->
 
                 <br />
 

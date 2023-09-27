@@ -2,11 +2,11 @@
   <v-app>
     <Header />
     <v-main class="bg-grey-darken-3 h-100">
-      This is home page
+      This is account page
     </v-main>
-  </v-app>  
+  </v-app>
 </template>
 
 <script setup>
-  import Header from '@/components/Header.vue';
+import Header from '@/components/Header.vue';
 </script>
