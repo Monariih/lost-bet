@@ -43,7 +43,12 @@ const routes = [
         path: '/withdraw',
         name: 'Withdraw',
         component: () => import('@/views/Withdraw.vue'),
-      }
+      },
+      {
+        path: '/games/roulette',
+        name: 'Roulette',
+        component: () => import('@/views/games/Roulette.vue'),
+      },
     ],
   },
 ]

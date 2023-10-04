@@ -71,7 +71,7 @@
                 <v-text-field
                   :readonly="loading"
                   :rules="[required]"
-                  v-model="userDoc"
+                  v-model="userCpf"
                   density="compact"
                   placeholder="Please insert your CPF"
                   prepend-inner-icon="mdi-account-box-outline"
@@ -161,7 +161,7 @@ export default {
     form: false,
     userEmail: null,
     password: null,
-    userDoc: null,
+    userCpf: null,
     userAge: null,
     userBirth: null,
     userName: null,
@@ -171,30 +171,44 @@ export default {
     visible: false,
   }),
   methods: {
-    onSubmit() {
-      if (!this.form) return;
-
-      this.loading = true;
-
-      if (this.userAge < 18) {
-        this.modal = true;
-      } else {
-        api
-          .post("/salvar", {
-            userName: `${this.userName}`,
-            userEmail: `${this.userEmail}`,
-            userDoc: `${this.userDoc}`,
-            userBirth: `${this.userAge}`,
-            userPassword: `${this.password}`,
-          })
-          .then((response) => {
-            this.modalSuccess = true;
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+    // onSubmit(){
+    //   api.get("/v1/users", {
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    // }
+    async createUser(){
+      try {
+        const response = await api.post("/v1/create", {
+          name: this.userName,
+          email: this.userEmail,
+          password: this.password,
+          cpf: this.userCpf,
+          balance: 1000,
+          // age: this.userAge,
+          // birth: this.userBirth,
+        });
+        console.log(response);
+        this.modalSuccess = true;
+      } catch (error) {
+        console.log(error);
+        this.modalError = true;
       }
+    },
+    onSubmit() {
+
+      this.createUser()
+
+      console.log("onsubmit")
+
+      // this.loading = true;
+
+      // if (this.userAge < 18) {
+      //   this.modal = true;
+      // } else {
+        
+      // }
     },
     required(v) {
       return !!v || "Field is required";
