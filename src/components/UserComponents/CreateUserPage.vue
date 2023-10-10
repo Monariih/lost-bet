@@ -185,7 +185,7 @@ export default {
           email: this.userEmail,
           password: this.password,
           cpf: this.userCpf,
-          balance: 1000,
+          balance: 0,
           // age: this.userAge,
           // birth: this.userBirth,
         });
