@@ -16,7 +16,7 @@
                 <v-card-subtitle>
                   Teste a sua sorte e habilidades no nosso jogo de 21
                 </v-card-subtitle>
-                <v-btn color="primary" href="/blackjack">BlackJack</v-btn>
+                <v-btn color="primary" href="/games/blackjack">BlackJack</v-btn>
               </v-card-item>
             </v-card>
           </v-col>
