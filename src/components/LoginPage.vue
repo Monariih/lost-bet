@@ -45,7 +45,7 @@
                 @submit.prevent="onSubmit"
               >
                 <v-text-field
-                  v-model="email"
+                  v-model="userCpf"
                   density="compact"
                   prepend-inner-icon="mdi-email-outline"
                   :readonly="loading"
@@ -53,10 +53,11 @@
                   class="my-2"
                   clearable
                   variant="outlined"
-                  placeholder="Enter your email"
+                  placeholder="Enter your cpf"
                 ></v-text-field>
 
                 <v-text-field
+                v-model="password"
                 :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
                 :type="visible ? 'text' : 'password'"
                 :readonly="loading"
@@ -91,7 +92,6 @@
                   :disabled="!form"
                   :loading="loading"
                   block
-                  to="/home"
                   color="success"
                   size="large"
                   type="submit"
@@ -128,9 +128,35 @@
     </v-container>
   </v-main>
   <Footer />
+  <v-dialog
+    v-model="dialogError"
+    transition="dialog-top-transition"
+    theme="dark"
+    width="auto"
+  >
+    <v-card>
+      <v-toolbar color="red" title="ALERTA!"></v-toolbar>
+      <v-card-text>
+        <div class="text-h3 text-center pa-12">
+          {{ errorMsg }}
+        </div>  
+      </v-card-text>
+      <v-card-actions class="justify-end">
+      </v-card-actions>
+      <v-btn variant="text" @click="dialogError = false">Close</v-btn>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 import Footer from '@/components/Footer.vue'
+import api from '@/configs/api'
+import router from '@/router'
+
+defineProps({
+  user: {
+    
+  }
+})
 
 export default {
   components: {
@@ -138,21 +164,49 @@ export default {
   },
   data: () => ({
     form: false,
-    email: null,
+    dialogError: false,
+    userCpf: null,
     password: null,
     loading: false,
     visible: false,
+    errorMsg: null,
   }),
 
   methods: {
-    onSubmit () {
+    async login(){
+      
+    },
+
+    async onSubmit () {
       if (!this.form) return
 
-      this.loading = true
+      const response = await api.get(`/v1/user/${this.userCpf}`, {
+        userCpf: this.userCpf,
+        password: this.password,
+      })
 
-      console.log(this.email, this.password)
+      .then((response) => {
+        if (response.data.password === this.password){
+          this.loading = true
+          setTimeout(() => (this.loading = false), 2000)
+          router.push('/home')
+          return response
+        } else {
+          this.errorMsg = "Senha incorreta"
+          this.dialogError = true
+          this.loading = true
+          setTimeout(() => (this.loading = false), 2000)
+          return response
+        }
+      })
+      .catch((error) => {
+        this.errorMsg = "Usuário não encontrado"
+        this.dialogError = true
+        this.loading = true
+        setTimeout(() => (this.loading = false), 2000)
+        return error
+      })
 
-      setTimeout(() => (this.loading = false), 2000)
     },
     required (v) {
       return !!v || 'Field is required'

@@ -171,13 +171,6 @@ export default {
     visible: false,
   }),
   methods: {
-    // onSubmit(){
-    //   api.get("/v1/users", {
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    // }
     async createUser(){
       try {
         const response = await api.post("/v1/create", {
@@ -201,14 +194,6 @@ export default {
       this.createUser()
 
       console.log("onsubmit")
-
-      // this.loading = true;
-
-      // if (this.userAge < 18) {
-      //   this.modal = true;
-      // } else {
-        
-      // }
     },
     required(v) {
       return !!v || "Field is required";
