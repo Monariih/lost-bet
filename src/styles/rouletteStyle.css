@@ -1,0 +1,89 @@
+body{
+  font-family: 'Titillium Web', sans-serif;
+  
+}
+
+h2{
+text-align: center;
+}
+
+
+button:hover{
+cursor: pointer;
+opacity: 0.5;
+}
+
+.btnText{
+color: #FFFF;
+}
+.btnPlay{
+  
+background-color: #FF9900;
+color: #FFFF;
+  
+}
+
+#balance{
+font-weight: bold;
+text-align: center;
+color: #FFFF;
+}
+
+.roulette-wrapper{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  width:100%;
+  margin:0 auto;
+  overflow:hidden;
+}
+
+.roulette-wrapper .selector{
+  width:3px;
+  background:grey;
+  left:50%;
+  height:100%;
+  transform:translate(-50%,0%);
+  position:absolute;
+  z-index:2;
+}
+
+.roulette-wrapper .wheel{
+  display:flex;
+}
+
+.roulette-wrapper .wheel .row{
+  display:flex;
+}
+
+.roulette-wrapper .wheel .row .card{
+  height:75px;
+  width:75px;
+  margin:3px;
+  border-radius:8px;
+  border-bottom:3px solid rgba(0,0,0,0.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:1.5em;
+  
+}
+
+.card.red{
+  background:red;
+}
+
+.card.black{
+  background:#2D3035;
+}
+
+.card.green{
+  
+  background:#00C74D;
+}
+
+.wheel{
+padding: 20px;
+background-color:#161616;;
+}
