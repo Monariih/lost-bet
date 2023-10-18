@@ -55,6 +55,12 @@ const routes = [
         name: 'Roulette',
         component: () => import('@/views/games/Roulette.vue'),
       },
+
+      {
+        path: '/games/jackpot',
+        name: 'Jackpot',
+        component: () => import('@/views/games/Jackpot.vue'),
+      },
     ],
   },
 ]
