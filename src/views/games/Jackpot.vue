@@ -1,85 +1,195 @@
 <template>
-    <div>
-      <img src="@/assets/logo_2.png" alt="">
-      <p id="balance">Saldo atual: {{ saldo }}</p>
-      <p id="message">{{ message }}</p>
-      <div id="app">
-        <audio id="slotSound" src="@/assets/sound/slot_sound.mp3"></audio>
-        <audio id="loseSound" src="@/assets/sound/lose_sound.mp3"></audio>
-        <audio id="winSound" src="@/assets/sound/win_sound.mp3"></audio>
-        <div class="doors">
-          <div class="door">
-            <div class="boxes" id="slot1">
-              <!-- <div class="box">?</div> -->
+    <v-app>
+        <Header/>
+        <v-main class="bg-grey-darken-3 h-100">
+          <body>
+            
+            <v-alert
+              v-if="errorAlert1"
+              density=“compact”
+              type="error"
+              title="ERRO"
+              text="Você não possui saldo suficiente, O valor minimo para apostas é de R$10"
+            ></v-alert>
+
+            <v-alert
+              v-if="loseAlert"
+              density=“compact”
+              type="error"
+              title="Você PERDEU!"
+              text="O valor de aposta foi debitado do seu saldo!"
+            ></v-alert>
+
+            <v-alert
+              v-if="winAlert1"
+              density=“compact”
+              type="success"
+              title="Você GANHOU a aposta!"
+              text="O valor de ganho foi incrementado no seu saldo!"
+            ></v-alert>
+            <div>
+
+              <audio ref="slotAudio">
+                <source src="./sound/slot_sound.mp3" type="audio/mpeg">
+              </audio>
+
+              <audio ref="winAudio">
+                <source src="./sound/win_sound.mp3" type="audio/mpeg">
+              </audio>
+
+              <audio ref="loseAudio">
+                <source src="./sound/lose_sound.mp3" type="audio/mpeg">
+              </audio>
+              
+              <p id="balance">Saldo: {{ balance }}</p>
+              
+              <div id="app">
+                <h1>JACKPOT</h1>
+                <h5>máquina de slots</h5>
+                <br>
+
+                  <div class="doors">
+                  <div class="door">
+                      <div class="boxes" id="slot1">
+                        <v-img class="img" src="@/assets/logoFundoPreto.png" ></v-img>
+                      <!-- <div class="box">?</div> -->
+                      </div>
+                  </div>
+                  <div class="door">
+                      <div class="boxes">
+                        <v-img class="img" src="@/assets/logoFundoPreto.png"></v-img>
+                      </div>
+                  </div>
+                  <div class="door">
+                      <div class="boxes" id="slot3">
+                        <v-img class="img" src="@/assets/logoFundoPreto.png" ></v-img>
+                      </div>
+                  </div>
+                  </div>
+                  <br>
+                  <div class="buttons">
+                    <v-btn class="btnPlay" height="120" @click="cleanAlert(), validateValue()">
+                      <h3>Jogar - R$ 10</h3>
+                    </v-btn>
+                  </div>
+              </div>
             </div>
-          </div>
-          <div class="door">
-            <div class="boxes">
-              <!-- <div class="box">?</div> -->
-            </div>
-          </div>
-          <div class="door">
-            <div class="boxes" id="slot3">
-              <!-- <div class="box">?</div> -->
-            </div>
-          </div>
-        </div>
-        <div class="buttons">
-          <button @click="spin">Jogar - R$10</button>
-        </div>
-      </div>
-    </div>
-  </template>
+          </body>
+        </v-main>
+    </v-app>
+    
+    
+</template>
+
+<script setup>
+  import Header from '@/components/Header.vue';
+</script>
   
   <script>
   export default {
     data() {
       return {
         items: [
-          '❌', '💰', '☠', '💵', '🤡', '7', '💎',
-          '❌', '💰', '☠', '💵', '🤡', '7', '💎',
-          '❌', '💰', '☠', '💵', '🤡', '7', '💎',
+        '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
+        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
+        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+        '💰', '💰', '💰', '💰', '💰', '💰', '💰','💰',
+        '💎', '💎', '💎', '💎','💎','💎',
+        '7', '7', '7', '7', '7', '7','7', '7', 
+         
         ],
         doors: null,
         slotSound: null,
         loseSound: null,
         winSound: null,
-        balance: 1000,
+
+
+        errorAlert1: false,
+        winAlert1: false,
+        loseAlert: false,
+        
         betValue: 10,
-        message: '',
+        
         slot1: null,
         slot2: null,
         slot3: null,
-        saldo: 0,
+        
+        balance: 1000,
+        
       };
     },
     methods: {
+      cleanAlert(){
+        this.errorAlert1 = false;
+        this.loseAlert = false;
+        this.winAlert1= false;
+      },
+
       slotAudio() {
-        this.slotSound.play();
+        this.$refs.slotAudio.play();
       },
       winAudio() {
-        this.winSound.play();
+        this.$refs.winAudio.play();
       },
       loseAudio() {
-        this.loseSound.play();
+        this.$refs.loseAudio.play();
       },
       verifyRoundItems() {
         if (this.slot1 === this.slot2 && this.slot2 === this.slot3) {
-          this.message = 'Você VENCEU a aposta!';
-          this.message.style.color = 'green';
-          this.saldo += 100;
-          this.balance = this.saldo;
-          this.winAudio();
-        } else {
-          this.message = 'Você PERDEU a aposta!';
-          this.message.style.color = 'red';
-          this.balance = this.saldo;
+
+          
+          if(this.slot1 ==='7'){
+
+            this.balance = parseFloat(this.balance)+ 1000;
+            this.winAlert1 = true;
+            this.winAudio();
+          }
+
+          else if(this.slot1 ==='💎'){
+
+            this.balance = parseFloat(this.balance)+ 500;
+            this.winAlert1 = true;
+            this.winAudio();
+
+          }
+
+          else if(this.slot1 ==='💰'){
+            this.balance = parseFloat(this.balance)+ 250;
+            this.winAlert1 = true;
+            this.winAudio();
+          }
+
+          else if(this.slot1 ==='💵'){
+            this.balance = parseFloat(this.balance)+ 100;
+            this.winAlert1 = true;
+            this.winAudio();
+          }
+
+          else{
+
+            this.loseAlert=true;
+            this.loseAudio();
+
+          }
+
+      
+        }
+
+        else if(
+          this.slot1 ==='❌' || this.slot2 === '❌' || this.slot3 ==='❌' ||
+          this.slot1 ==='☠' || this.slot2 === '☠' || this.slot3 ==='☠' ){
+          this.loseAlert=true;
           this.loseAudio();
         }
+
+        else{
+            this.balance = parseFloat(this.balance)+ 30;
+            this.winAlert1 = true;
+            this.winAudio();
+        }
       },
-      cleanMessage() {
-        this.message = '';
-      },
+      
       init(groups = 1, duration = 1) {
         for (const door of this.doors) {
           door.dataset.spinned = '0';
@@ -124,11 +234,28 @@
           door.replaceChild(boxesClone, boxes);
         }
       },
+
+      validateValue(){
+
+        if(this.balance<10){
+          this.errorAlert1 = true;
+          setTimeout(() => {
+          this.errorAlert1 = false;
+        }, 3000);
+        }
+
+        else{
+          this.cleanAlert();
+          this.spin();
+        }
+      },
+
       async spin() {
+
         this.init(1, 2);
         setTimeout(this.slotAudio, 250);
-        this.saldo = parseFloat(this.saldo) - parseFloat(this.betValue);
-        this.balance = this.saldo;
+        this.balance = parseFloat(this.balance) - 10;
+        
         for (let i = 0; i < this.doors.length; i++) {
           const door = this.doors[i];
           const boxes = door.querySelector('.boxes');
@@ -156,41 +283,39 @@
       },
     },
     mounted() {
+      
       this.doors = document.querySelectorAll('.door');
       this.slotSound = document.getElementById('slotSound');
       this.loseSound = document.getElementById('loseSound');
       this.winSound = document.getElementById('winSound');
-      this.balance = this.saldo;
+      
     },
+
+    
   };
   </script>
   <style scoped>
   /* Estilos CSS específicos para este componente */
+
   body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
     font-family: 'Titillium Web', sans-serif;
-    background-color: #111111;
+    padding: 15px
+    
   }
   
-  img {
-    width: 200px;
-    height: 170px;
+  
+  
+  #app {
+    border-radius: 15px;
+    height: 550px;
+    width: 550px;
+    background-color:#161616;;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    margin-bottom: 10px;
-  }
-  
-  #app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
   }
   
   .doors {
@@ -198,18 +323,29 @@
   }
   
   .door {
+    padding-top: 20px;
     background: #fafafa;
     width: 100px;
     height: 110px;
     overflow: hidden;
     border-radius: 5px;
     margin: 5px;
+    color: black;
+    font-size: 3rem;
+    text-align: center;
   }
   
   .boxes {
+    
+    text-align: center;
     /* transform: translateY(0); */
     transition: transform 1s ease-in-out;
   }
+
+.img{
+  width: 90px;
+  margin-left: 5px;
+}
   
   .box {
     display: flex;
@@ -222,6 +358,11 @@
     margin: 1rem 0 2rem 0;
   }
   
+  .btnPlay{
+    color: #FFFF;
+    background-color: #FF9900;
+  }
+
   button {
     cursor: pointer;
     font-size: 1.2rem;
@@ -231,11 +372,11 @@
     padding: 10px 15px;
     text-align: center;
     padding: 8px;
-    color: #FFFF;
+    color: black;
     width: 325px;
     height: 74.67px;
     border-radius: 10px;
-    background-color: #FF9900;
+    
   }
   
   button:hover {

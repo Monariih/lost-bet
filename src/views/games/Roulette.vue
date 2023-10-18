@@ -152,7 +152,7 @@
             
             <v-btn
               class="my-2 btnPlay"
-              @click="validateValue()"
+              @click="cleanAlert(),validateValue()"
               block
               size="120"
             >
