@@ -24,10 +24,4 @@
 
 <script setup>
   import Header from '@/components/Header.vue';
-
-  const goToRoulette = () => {
-    router.push({ name: 'Roulette' });
-    console.log("bhtn")
-  };
-
 </script>
