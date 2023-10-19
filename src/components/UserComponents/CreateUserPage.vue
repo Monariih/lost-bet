@@ -79,16 +79,12 @@
                   @click:append-inner="visible = !visible"
                 ></v-text-field>
 
-                <!-- <v-text-field
-                  :readonly="loading"
+                <v-date-picker 
+                  color="#FF9900"
+                  theme="dark"
+                  v-model="userBirth"
                   :rules="[required]"
-                  v-model="userAge"
-                  density="compact"
-                  placeholder="Please insert your age"
-                  prepend-inner-icon="mdi-check-circle-outline"
-                  variant="outlined"
-                  @click:append-inner="visible = !visible"
-                ></v-text-field> -->
+                ></v-date-picker>
 
                 <br />
 
@@ -152,10 +148,12 @@
 <script>
 import Footer from "@/components/Footer.vue";
 import api from "@/configs/api";
+import { VDatePicker } from 'vuetify/labs/VDatePicker'
 
 export default {
   components: {
     Footer,
+    VDatePicker
   },
   data: () => ({
     form: false,
@@ -170,7 +168,20 @@ export default {
     loading: false,
     visible: false,
   }),
+  watch: {
+    userBirth: function (val) {
+      this.userAge = this.calculateAge(val)
+      if (this.userAge < 18) {
+        this.modalError = true
+      }
+    }
+  },
   methods: {
+    calculateAge(birthday) {
+      var ageDifMs = Date.now() - birthday.getTime();
+      var ageDate = new Date(ageDifMs);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    },
     async createUser(){
       try {
         const response = await api.post("/v1/create", {
@@ -179,8 +190,6 @@ export default {
           password: this.password,
           cpf: this.userCpf,
           balance: 0,
-          // age: this.userAge,
-          // birth: this.userBirth,
         });
         console.log(response);
         this.modalSuccess = true;
@@ -190,10 +199,7 @@ export default {
       }
     },
     onSubmit() {
-
       this.createUser()
-
-      console.log("onsubmit")
     },
     required(v) {
       return !!v || "Field is required";
