@@ -74,20 +74,15 @@
                   <v-col
                     class="transparent"
                   >
-                  
                     <router-link
                       to="/forgot-password"
                       class="flex text-blue"      
                     >
                         Esqueçeu sua senha? clique aqui.
                     </router-link>
-                  
                   </v-col>
                 </v-row>
-                
-                
                 <br>
-
                 <v-btn
                   :disabled="!form"
                   :loading="loading"
@@ -168,10 +163,6 @@ export default {
 
   methods: {
     async login(){
-      
-    },
-
-    async onSubmit () {
       if (!this.form) return
 
       const response = await api.get(`/v1/user/${this.userCpf}`, {
@@ -200,6 +191,9 @@ export default {
         setTimeout(() => (this.loading = false), 2000)
         return error
       })
+    },
+
+    async onSubmit () {
 
     },
     required (v) {
