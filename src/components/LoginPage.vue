@@ -152,8 +152,6 @@ import Footer from '@/components/Footer.vue'
 import api from '@/configs/api'
 import router from '@/router'
 
-
-
 export default {
   components: {
     Footer,
