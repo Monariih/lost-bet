@@ -302,9 +302,8 @@
     padding: 15px
     
   }
-  
-  
-  
+
+   
   #app {
     border-radius: 15px;
     height: 550px;
@@ -318,90 +317,7 @@
     
   }
   
-  .doors {
-    display: flex;
-  }
-  
-  .door {
-    padding-top: 20px;
-    background: #fafafa;
-    width: 100px;
-    height: 110px;
-    overflow: hidden;
-    border-radius: 5px;
-    margin: 5px;
-    color: black;
-    font-size: 3rem;
-    text-align: center;
-  }
-  
-  .boxes {
-    
-    text-align: center;
-    /* transform: translateY(0); */
-    transition: transform 1s ease-in-out;
-  }
-
-.img{
-  width: 90px;
-  margin-left: 5px;
-}
-  
-  .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 3rem;
-  }
-  
-  .buttons {
-    margin: 1rem 0 2rem 0;
-  }
-  
-  .btnPlay{
-    color: #FFFF;
-    background-color: #FF9900;
-  }
-
-  button {
-    cursor: pointer;
-    font-size: 1.2rem;
-    margin: 0 0.2rem;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    text-align: center;
-    padding: 8px;
-    color: black;
-    width: 325px;
-    height: 74.67px;
-    border-radius: 10px;
-    
-  }
-  
-  button:hover {
-    cursor: pointer;
-    opacity: 0.5;
-  }
-  
-  .info {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
-  
-  #balance {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-align: center;
-    color: #FFFF;
-  }
-  
-  #message {
-    font-weight: bold;
-    text-align: center;
-  }
   </style>
+
+<style src="@/styles/jackpotStyle.css"></style>
   
