@@ -152,12 +152,6 @@ import Footer from '@/components/Footer.vue'
 import api from '@/configs/api'
 import router from '@/router'
 
-defineProps({
-  user: {
-    
-  }
-})
-
 export default {
   components: {
     Footer,
