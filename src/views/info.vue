@@ -6,13 +6,13 @@
         <v-container>
           <v-row>
             <v-col>
-              <v-card>
-                <v-card-title> CARD 1 </v-card-title>
+              <v-card class="d-flex flex-nowrap text-justify">
+                <v-card-text> ESTA TELA VIRÃO INFORMAÇÕES SOBRE O PROJETO EM SI </v-card-text>
               </v-card>
             </v-col>
             <v-col>
-              <v-card>
-                <v-card-title> CARD 2 </v-card-title>
+              <v-card class="d-flex flex-nowrap text-justify">
+                <v-card-text> INFORMAÇÕES ESSAS, OS NOMES DOS RESPONSÁVEIS A HISTÓRIA DE COMO FOI FEITO EM PASSOS DO PROJETO POR EXEMPLO, E POR AI VAI! </v-card-text>
               </v-card>
             </v-col>
           </v-row>
@@ -23,11 +23,5 @@
 </template>
 
 <script setup>
-  import Header from '@/components/Header.vue';
-
-  const goToRoulette = () => {
-    router.push({ name: 'Roulette' });
-    console.log("bhtn")
-  };
-
+import Header from '@/components/Header.vue';
 </script>
