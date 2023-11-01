@@ -7,7 +7,13 @@
       </router-link>
     </v-app-bar-title>
     <v-spacer></v-spacer>
-
+    <span class="mx-2">
+      USER.BALANCE
+    </span>
+    <span class="mx-2 d-none d-sm-block">
+      USER.NAME
+    </span>
+    <v-avatar class="mx-4 d-none d-sm-block" color="surface-variant"></v-avatar>
   </v-app-bar>
 
   <v-navigation-drawer
