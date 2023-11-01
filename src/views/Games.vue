@@ -2,32 +2,41 @@
   <v-app>
     <Header />
     <v-main class="bg-grey-darken-3 h-100">
-      <v-container>
+      <v-container class="mx-30">
         <v-row>
-          <v-col>
+          <v-col
+          >
             <v-card theme="dark">
               <v-card-title>
-                BlackJack
+                Roleta
               </v-card-title>
               <v-parallax
-                src="https://images.ctfassets.net/93v9a59si7ol/nLfltjJVpMDpqyHqnlA4B/de4996d55168ef18ef6c921e7904a71f/Blackjack-4.png?w=1160&h=640&fm=webp&q=80&fit=thumb"
+                src="../assets/games imgs/roulette.jpg"
               ></v-parallax>
-              <v-card-item>
-                <v-card-subtitle>
-                  Teste a sua sorte e habilidades no nosso jogo de 21
-                </v-card-subtitle>
-                <v-btn color="primary" href="/games/blackjack">BlackJack</v-btn>
+              <v-spacer></v-spacer>
+              <v-card-text class="d-flex flex-nowrap text-justify">
+                Vem jogar na roleta e tentar a sorte! (Não nos resposabilizamos por vícios em ganhar dinheiro!)
+              </v-card-text>
+              <v-card-item class="d-flex justify-end">
+                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/games/roulette">Roleta</v-btn>
               </v-card-item>
             </v-card>
           </v-col>
-          <v-col>
+          <v-col
+          >
             <v-card theme="dark">
               <v-card-title>
-                Roulette
+                Jackpot
               </v-card-title>
               <v-parallax
-                src="https://hotmart.s3.amazonaws.com/product_pictures/a8388ff4-2026-40ab-ab36-17edc4421181/unnamed.jpg"
+                src="../assets/games imgs/slot-machine.jpg"
               ></v-parallax>
+              <v-card-text class="d-flex flex-nowrap text-justify">
+                No Jackpot você vai ter a verdadeira experiência de um cassino! (e de quebra ainda pode ganhar uma grana!) 
+              </v-card-text>
+              <v-card-item class="d-flex justify-end">
+                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/games/jackpot">Jackpot</v-btn>
+              </v-card-item>
             </v-card>
           </v-col>
         </v-row>
@@ -38,10 +47,13 @@
                 Configurações
               </v-card-title>
               <v-parallax
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTthirQsNpROQsPeNSjBZTMG9M4P0girsXupQ&usqp=CAU"
+                src="../assets/config.jpg"
               ></v-parallax>
-              <v-card-item>
-                <v-btn color="primary" href="/configuracoes">Configurações</v-btn>
+              <v-card-text class="d-flex flex-nowrap text-justify">
+                Aqui você pode configurar o site para ficar do seu jeito! (ou não, você que sabe)
+              </v-card-text>
+              <v-card-item class="d-flex justify-end">
+                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/config">Configurações</v-btn>
               </v-card-item>
             </v-card>
           </v-col>
@@ -51,8 +63,14 @@
                 Informações
               </v-card-title>
               <v-parallax
-                src="https://cdn.icon-icons.com/icons2/1517/PNG/512/infominimono_105818.png"
+                src="../assets/info.jpg"
               ></v-parallax>
+              <v-card-text class="d-flex flex-nowrap text-justify">
+                Aqui você pode ver as informações sobre o site e algo também sobre os criadores e responsáveis!
+              </v-card-text>
+              <v-card-item class="d-flex justify-end">
+                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/info">Informações</v-btn>
+              </v-card-item>
             </v-card>
           </v-col>
         </v-row>
