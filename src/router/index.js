@@ -15,9 +15,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "home" */ '@/views/Login.vue'),
       },
       {
-        path: '/home',
-        name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        path: '/info',
+        name: 'Info',
+        component: () => import('@/views/info.vue'),
+      },
+      {
+        path: '/config',
+        name: 'Config',
+        component: () => import('@/views/Config.vue'),
       },
       {
         path: '/forgot-password',

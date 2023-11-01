@@ -183,7 +183,7 @@ export default {
         if (response.data.password === this.password){
           this.loading = true
           setTimeout(() => (this.loading = false), 2000)
-          router.push('/home')
+          router.push('/games')
           return response
         } else {
           this.errorMsg = "Senha incorreta"

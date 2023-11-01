@@ -1,8 +1,8 @@
 <template>
   <v-app-bar class="bg-black">
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-app-bar-title>
-      <router-link to="/home">
+    <v-app-bar-title class="d-none d-sm-block">
+      <router-link to="/games">
         <v-img src="@/assets/logoSemFundoDeitada.png" width="200px"></v-img>
       </router-link>
     </v-app-bar-title>
