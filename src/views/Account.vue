@@ -4,8 +4,9 @@
     <v-main class="bg-grey-darken-3 h-100">
       <UserInfoPage />
     </v-main>
-    <Footer />
+    
   </v-app>
+  <Footer />
 </template>
 
 <script setup>
