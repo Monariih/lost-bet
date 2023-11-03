@@ -163,7 +163,6 @@ export default {
     password: null,
     userCpf: null,
     userAge: null,
-    userBirth: null,
     userName: null,
     modalError: false,
     modalSuccess: false,
