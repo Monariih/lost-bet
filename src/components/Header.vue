@@ -26,14 +26,22 @@
       <v-list-item prepend-icon="mdi-folder" title="Jogos" value="games" to="/games"></v-list-item>
       <v-list-item prepend-icon="mdi-account-multiple" title="Minha conta" value="account" to="/account"></v-list-item>
       <v-list-item prepend-icon="mdi-star" title="Saque" value="withdraw" to="/withdraw"></v-list-item>
+      <v-list-item prepend-icon="mdi-star" title="Depósito" value="deposit" to="/deposit"></v-list-item>
+      <v-divider></v-divider>
+      <v-list-item prepend-icon="mdi-logout" class="my-2" title="Sair" value="logout" @click="logout"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import router from '@/router'
 
 const drawer = ref(null)
+
+function logout() {
+  router.push('/')
+}
 </script>
 
 <script>
