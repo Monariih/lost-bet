@@ -47,7 +47,12 @@ const routes = [
       {
         path: '/withdraw',
         name: 'Withdraw',
-        component: () => import('@/views/Withdraw.vue'),
+        component: () => import('@/views/money-options/Withdraw.vue'),
+      },
+      {
+        path: '/deposit',
+        name: 'Deposit',
+        component: () => import('@/views/money-options/Deposit.vue'),
       },
       {
         path: '/games/blackjack',

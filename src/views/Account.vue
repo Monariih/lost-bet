@@ -2,7 +2,7 @@
   <v-app>
     <Header />
     <v-main class="bg-grey-darken-3 h-100">
-      <DepositAccountPage />
+      <UserInfoPage />
     </v-main>
     <Footer />
   </v-app>
@@ -11,5 +11,5 @@
 <script setup>
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header.vue';
-import DepositAccountPage from '@/components/UserComponents/DepositAccountPage.vue';
+import UserInfoPage from '@/components/UserComponents/UserInfoPage.vue';
 </script>
