@@ -8,10 +8,10 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <span class="mx-2">
-      USER.BALANCE
+      {{ user.balance }}
     </span>
     <span class="mx-2 d-none d-sm-block">
-      USER.NAME
+      {{ user.name }}
     </span>
     <v-avatar class="mx-4 d-none d-sm-block" color="surface-variant"></v-avatar>
   </v-app-bar>
@@ -37,9 +37,11 @@
 import { ref } from 'vue'
 import router from '@/router'
 
+const user = ref(JSON.parse(localStorage.getItem('user')))
 const drawer = ref(null)
 
 function logout() {
+  localStorage.removeItem('user')
   router.push('/')
 }
 </script>
