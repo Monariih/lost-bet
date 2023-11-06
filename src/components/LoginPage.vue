@@ -167,10 +167,6 @@ export default {
   }),
 
   methods: {
-    async login(){
-      
-    },
-
     async onSubmit () {
       if (!this.form) return
 
@@ -183,6 +179,7 @@ export default {
         if (response.data.password === this.password){
           this.loading = true
           setTimeout(() => (this.loading = false), 2000)
+          localStorage.setItem('user', JSON.stringify(response.data))
           router.push('/games')
           return response
         } else {
