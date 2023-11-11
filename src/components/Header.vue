@@ -8,12 +8,12 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <span class="mx-2">
-      {{ user.balance }}
+      {{ user.userbalance }}
     </span>
     <span class="mx-2 d-none d-sm-block">
-      {{ user.name }}
+      {{ user.username }}
     </span>
-    <v-avatar class="mx-4 d-none d-sm-block" color="surface-variant"></v-avatar>
+    <v-avatar class="mx-4" color="surface-variant"></v-avatar>
   </v-app-bar>
 
   <v-navigation-drawer

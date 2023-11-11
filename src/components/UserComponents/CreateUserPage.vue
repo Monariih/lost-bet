@@ -173,11 +173,11 @@ export default {
     async createUser(){
       try {
         const response = await api.post("/v1/create", {
-          name: this.userName,
-          email: this.userEmail,
-          password: this.password,
-          cpf: this.userCpf,
-          balance: 0,
+          username: this.userName,
+          useremail: this.userEmail,
+          userpassword: this.password,
+          usercpf: this.userCpf,
+          userbalance: 0,
           // age: this.userAge,
           // birth: this.userBirth,
         });

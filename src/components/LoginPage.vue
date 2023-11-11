@@ -171,12 +171,12 @@ export default {
       if (!this.form) return
 
       const response = await api.get(`/v1/user/${this.userCpf}`, {
-        userCpf: this.userCpf,
-        password: this.password,
+        usercpf: this.userCpf,
+        userpassword: this.password,
       })
 
       .then((response) => {
-        if (response.data.password === this.password){
+        if (response.data.userpassword === this.password){
           this.loading = true
           setTimeout(() => (this.loading = false), 2000)
           localStorage.setItem('user', JSON.stringify(response.data))
