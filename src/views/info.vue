@@ -7,7 +7,11 @@
           <v-row>
             <v-col>
               <v-card class="d-flex flex-nowrap text-justify">
-                <v-card-text> ESTA TELA VIRÃO INFORMAÇÕES SOBRE O PROJETO EM SI </v-card-text>
+                <v-card-text> O sistema de casa de apostas online Lost Bet tem como principal objetivo proporcionar uma experiência de usuário atraente tendo como público-alvo adultos maiores de 18 anos.
+                  No sistema de casa de apostas online oferecemos a oportunidade de realizar apostas em jogos de cassino, como roleta tradicional (Padrão Europeu) e máquina de caça níquel (Jackpot Slot machine),
+                  proporcionando diversão e entretenimento, ao mesmo tempo em que oferece a chance de obter lucros nos jogos disponíveis.
+                  Ressaltamos também a importância da ética e da responsabilidade no jogo, incentivando nossos clientes a jogar de forma consciente e moderada, 
+                  mantendo sempre o controle sobre suas de apostas.</v-card-text>
               </v-card>
             </v-col>
             <v-col>
