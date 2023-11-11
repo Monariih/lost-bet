@@ -69,7 +69,58 @@
 <Footer />
 </template>
 
-<script setup>
-import Header from '@/components/Header.vue';
+<script>
 import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue';
+import api from '@/configs/api';
+
+export default {
+	components: {
+		Footer,
+		Header,
+	},
+	data: () => ({
+		user: JSON.parse(localStorage.getItem('user')),
+		form: false,
+		loading: false,
+		value: null,
+		newBalance: null,
+	}),
+	created() {
+		console.log(this.user);
+	},
+	methods: {
+		async deposit() {
+			this.loading = true;
+			this.form = false;
+			this.newBalance = parseFloat(this.user.userbalance) - parseFloat(this.value);
+			try {
+				const response = await api.put(`/v1/user/${this.user.usercpf}`, {
+					usercpf: this.user.usercpf,
+					username: this.user.username,
+					useremail: this.user.useremail,
+					userpassword: this.user.userpassword,
+					userbalance: this.newBalance,
+				})
+				.then((response) => {
+					localStorage.setItem('user', JSON.stringify(response.data));
+					this.$router.push('/games');
+				});
+				this.loading = false;
+				this.form = true;
+				console.log(response);
+			} catch (error) {
+				this.loading = false;
+				this.form = true;
+				console.log(error);
+			}
+		},
+		onSubmit() {
+			this.deposit();
+		},
+		required(v) {
+			return !!v || 'Campo obrigatório';
+		},
+	}
+};
 </script>
