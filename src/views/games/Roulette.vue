@@ -94,8 +94,8 @@
             offset-lg="5"
           >
             <v-form>
-            
-              <p>Saldo: {{ balance }}</p> <!--Remover após backend -->
+              <br>
+              <p>Saldo Atual: R$ {{ balance }}</p> <!--Remover após backend -->
               <v-text-field
                 ref="inputBet"
                 type="number"
@@ -152,6 +152,7 @@
             
             <v-btn
               class="my-2 btnPlay"
+              :disabled="playDisabled"
               @click="cleanAlert(),validateValue()"
               block
               size="120"
@@ -161,6 +162,70 @@
           </v-col>
         </v-row>
         
+        <v-row>
+					<v-col>
+						<br><br>
+            <v-card
+							class="ma-auto bg-grey-darken-4 elevation-2"
+							theme="dark"
+							
+						>
+							<v-card-title>
+								<h3>Como jogar?</h3>
+							</v-card-title>
+							<v-card-text
+								class="text-justify"
+                
+							>
+              <p>
+                <b>1. Faça sua Aposta:</b><br>
+                Ao começar, você precisará decidir quanto deseja apostar. Esse valor será a base para seus possiveis ganhos. (Lembre-se de jogar de maneira responsável e dentro de seus limites).
+              </p><br>
+              
+              <p><b>2. Escolha a Cor de aposta:</b><br>
+                Você tem três opções de cores para apostar: vermelho, preto ou verde. Considere a distribuição dos números e faça sua escolha com base na intuição ou estratégia.
+              </p>
+
+                <v-list>
+                  <li>
+                     <b  class="txtRed">Vermelho:</b> 1 a 7
+                  </li>
+
+                  <li>
+                    <b>Preto:</b> 8 a 14
+                  </li>
+
+                  <li>
+                    <b class="txtGreen">Verde:</b> Apenas 0
+                  </li>
+                </v-list>
+
+              <p>
+                <b> 3. Vitória no Vermelho ou Preto:</b><br>
+                Se sua aposta estava em vermelho ou preto o marcador corresponde à sua escolha, parabéns! <br> 
+                Você receberá o dobro do valor apostado. Por exemplo, se você apostou R$ 10 e acertou, receberá R$ 20 de volta. <b>(45% de chance de cair Vermelho ou Preto)</b>
+              </p><br>
+            
+              <p>
+                <b>4. Vitória no Verde:</b><br>
+                Se o marcador parar no número verde, você terá uma vitória espetacular, recebendo 14 vezes o valor apostado. <b>(10% de chance de cair Verde)</b>
+                <br>
+              </p>
+
+              <p>
+                <b>Exemplo de Vitória no Verde:</b><br>
+              </p><li>Imagine que você apostou R$ 10 no verde, e a bola escolheu esse número. Neste caso, você receberá uma incrível recompensa de R$ 140!</li><br>
+
+              <p>
+                <b>5. Divirta-se com resposabilidade:</b><br>
+                A roleta é um jogo de azar. É crucial manter a diversão e o entretenimento como prioridade. A sorte pode sorrir para qualquer um, então aproveite a experiência e divirta-se de maneira responsável. 
+              </p><br>
+              <h3>LEMBRE-SE</h3>
+              <p>Nunca aposte aquilo que você não pode perder.</p>
+							</v-card-text>	
+						</v-card>	
+					</v-col>
+				</v-row>
         
       </body>
       
@@ -175,22 +240,28 @@
   
 </script>
 
-<script>
 
+
+
+<script>
+  import api from '@/configs/api';
   export default {
     
     data() {
-
+     
       return {
-        
+        user: JSON.parse(localStorage.getItem('user')),
+
         errorAlert1: false,
         errorAlert2: false,
         errorAlert3: false,
         errorAlert4: false,
+        playDisabled: false,
 
         winAlert1: false,
         loseAlert: false,
-        balance: 1000,
+        balance: 0,
+        newBalance: 0,
         
         rules: [
           value => !!value || 'Obrigatório.',
@@ -222,6 +293,9 @@
     created() {
       
       this.initWheel();
+      this.balance = this.user.userbalance
+      
+
     },
 
     methods: {
@@ -396,7 +470,7 @@
       spinWheel() {
         this.resultColor();
         this.calculateValue();
-
+        this.playDisabled = true;
         if (this.spinning) return;
 
         this.spinning = true;
@@ -457,28 +531,63 @@
         
       },
 
+
+
+      async updateBalance(){
+
+        try {
+          const response = await api.put(`/v1/user/${this.user.usercpf}`, {
+            usercpf: this.user.usercpf,
+            username: this.user.username,
+            useremail: this.user.useremail,
+            userpassword: this.user.userpassword,
+            userbalance: this.newBalance,
+        })
+				.then((response) => {
+					localStorage.setItem('user', JSON.stringify(response.data));
+					
+				});
+				this.loading = false;
+				
+				console.log(this.newBalance);
+			} catch (error) {
+				this.loading = false;
+				
+				console.log(error);
+			}
+      
+      
+      },
+
       calculateValue(){
 
         this.balance = parseFloat(this.balance)-parseFloat(this.betValue);
+
+        this.newBalance = this.balance;
+        this.updateBalance();
+        
 
         setTimeout(() =>{
 
           if(this.selectedColor === 'red' & this.cassinoColor ==='red'){
             this.winAlert1 = true;
-            this.balance = parseFloat(this.balance)+(parseFloat(this.betValue)*2);
+            this.newBalance = parseFloat(this.balance)+(parseFloat(this.betValue)*2);
             this.winAudio();
+            this.updateBalance();
           }
 
           else if(this.selectedColor === 'black' & this.cassinoColor ==='black'){
             this.winAlert1 = true;
-            this.balance = parseFloat(this.balance)+(parseFloat(this.betValue)*2)
+            this.newBalance = parseFloat(this.balance)+(parseFloat(this.betValue)*2)
             this.winAudio();
+            this.updateBalance();
           }
 
           else if(this.selectedColor === 'green' & this.cassinoColor ==='green'){
             this.winAlert1 = true;
-            this.balance = parseFloat(this.balance)+(parseFloat(this.betValue)*14);
+            this.newBalance = parseFloat(this.balance)+(parseFloat(this.betValue)*14);
             this.winAudio();
+            this.updateBalance();
           }
 
           else{
@@ -490,6 +599,11 @@
 
         },6000)
 
+        setTimeout(() =>{
+          window.location.reload();
+        }
+
+        ,9000)
 
        
       },
@@ -505,6 +619,11 @@ body{
   font-family: 'Titillium Web', sans-serif;
   padding: 15px
 };
+
+li{
+  display: inline;
+  padding: 50px;
+}
 
 </style>
 

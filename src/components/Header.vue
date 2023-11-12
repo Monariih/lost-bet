@@ -8,7 +8,7 @@
     </v-app-bar-title>
     <v-spacer></v-spacer>
     <span class="mx-2">
-      {{ user.userbalance }}
+      Saldo da conta: R$ {{ user.userbalance }}
     </span>
     <span class="mx-2 d-none d-sm-block">
       {{ user.username }}

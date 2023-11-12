@@ -1,4 +1,6 @@
 // Composables
+import NotFound from '@/views/NotFound.vue'
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -70,6 +72,12 @@ const routes = [
         path: '/games/jackpot',
         name: 'Jackpot',
         component: () => import('@/views/games/Jackpot.vue'),
+      },
+
+      {
+        path: '/:catchAll(.*)',
+        name: 'NotFound',
+        component: NotFound,
       },
     ],
   },

@@ -41,7 +41,7 @@
                 <source src="./sound/lose_sound.mp3" type="audio/mpeg">
               </audio>
               
-              <p id="balance">Saldo: {{ balance }}</p>
+              <p id="balance">Saldo Atual: R$ {{ balance }}</p>
               
               <div id="app">
                 <h1>JACKPOT</h1>
@@ -68,12 +68,83 @@
                   </div>
                   <br>
                   <div class="buttons">
-                    <v-btn class="btnPlay" height="120" @click="cleanAlert(), validateValue()">
+                    <v-btn class="btnPlay" :disabled="playDisabled" height="120" @click="cleanAlert(), validateValue()">
                       <h3>Jogar - R$ 10</h3>
                     </v-btn>
                   </div>
               </div>
             </div>
+
+            <v-row>
+              <v-col>
+                <br><br>
+                <v-card
+                  class="ma-auto bg-grey-darken-4 elevation-2"
+                  theme="dark"
+                  
+                >
+                  <v-card-title>
+                    <h3>Como jogar?</h3>
+                  </v-card-title>
+                  <v-card-text
+                    class="text-justify"
+                    
+                  >
+                  <p>
+                    <b>1. Faça sua Aposta:</b><br>
+                    Para começar, insira R$ 10 e dê um giro na máquina.(Lembre-se de jogar de maneira responsável e dentro de seus limites).
+                  </p><br>
+                  
+                  <p>
+                    <b>2. Os simbolos Positivos:</b><br>
+                    <v-list>
+                      <li>
+                        <b>Número 7:</b> 
+                        Se os três símbolos coincidirem, e todos forem iguais a '7's, prepare-se para um prêmio extraordinário de R$ 1000 <b>(10% de chance de um slot receber um Número 7)</b>
+                      </li>
+
+                      <li>
+                        <b>Diamante💎:</b> Se os três símbolos exibirem a beleza reluzente de um diamante, você será recompensado com um prêmio de R$ 500 <b>(12% de chance de um dos slots receber um Diamante💎 e)</b>
+                      </li>
+
+                      <li>
+                        <b>Bolsa de Dinheiro💰 :</b> Se os três símbolos exibirem uma bolsa de dinheiro, você receberá uma recompensa de R$ 250 <b>(165% de chance de um dos slots receber uma Bolsa de Dinheiro💰)</b>
+                      </li>
+
+                      <li>
+                        <b>Nota de Dinheiro💵 : </b>Se a máquina decidir conceder três notas de dinheiro, você ganhará R$ 100. Um prêmio que fará sua carteira sorrir. <b>(365% de chance de um dos slots receber uma Nota de Dinheiro💵)</b>
+                      </li>
+
+                      <li>
+                        <b>Combinação de Símbolos: </b>Se os três símbolos forem diferentes entre os mencionados acima, ainda há uma vitória em seu caminho. Ganhe R$ 30 por essa combinação única!
+                      </li>
+
+                    </v-list>
+                  </p>
+
+                  <p>
+                    <b> 3. Os simbolos Negativos:</b><br>
+                      A aposta será perdida se algum dos 3 slots receber os simbolos de
+                      <v-list>
+                        <li>
+                          <b>Caveira:☠ </b>
+                        </li>
+                        <li>
+                          <b>Letra X:❌</b>
+                        </li>
+                      </v-list>
+                  </p>
+
+                  <p>
+                    <b>6. Divirta-se com resposabilidade:</b><br>
+                    A Máquina de Jackpot é um jogo de azar. É crucial manter a diversão e o entretenimento como prioridade. A sorte pode sorrir para qualquer um, então aproveite a experiência e divirta-se de maneira responsável. 
+                  </p><br>
+                  <h3>LEMBRE-SE</h3>
+                  <p>Nunca aposte aquilo que você não pode perder.</p>
+                  </v-card-text>	
+                </v-card>	
+              </v-col>
+            </v-row>
           </body>
         </v-main>
     </v-app>
@@ -82,15 +153,26 @@
 </template>
 
 <script setup>
+
   import Header from '@/components/Header.vue';
-</script>
   
-  <script>
+</script>
+
+
+
+
+<script>
+  import api from '@/configs/api';
   export default {
+    
     data() {
       return {
+
+         user: JSON.parse(localStorage.getItem('user')),
+
         items: [
         '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
+        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
         '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
         '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
         '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
@@ -104,7 +186,7 @@
         loseSound: null,
         winSound: null,
 
-
+        playDisabled: false,
         errorAlert1: false,
         winAlert1: false,
         loseAlert: false,
@@ -115,7 +197,8 @@
         slot2: null,
         slot3: null,
         
-        balance: 1000,
+        balance: 0,
+        newBalance:0,
         
       };
     },
@@ -135,6 +218,33 @@
       loseAudio() {
         this.$refs.loseAudio.play();
       },
+
+      async updateBalance(){
+
+        try {
+          const response = await api.put(`/v1/user/${this.user.usercpf}`, {
+            usercpf: this.user.usercpf,
+            username: this.user.username,
+            useremail: this.user.useremail,
+            userpassword: this.user.userpassword,
+            userbalance: this.newBalance,
+        })
+        .then((response) => {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          
+        });
+        this.loading = false;
+
+        console.log(this.newBalance);
+        } catch (error) {
+        this.loading = false;
+
+        console.log(error);
+        }
+
+
+      },
+
       verifyRoundItems() {
         if (this.slot1 === this.slot2 && this.slot2 === this.slot3) {
 
@@ -173,7 +283,6 @@
 
           }
 
-      
         }
 
         else if(
@@ -188,6 +297,12 @@
             this.winAlert1 = true;
             this.winAudio();
         }
+
+        setTimeout(() =>{
+          window.location.reload();
+        },3000)
+
+        
       },
       
       init(groups = 1, duration = 1) {
@@ -247,6 +362,7 @@
         else{
           this.cleanAlert();
           this.spin();
+          this.playDisabled = true;
         }
       },
 
@@ -254,7 +370,10 @@
 
         this.init(1, 2);
         setTimeout(this.slotAudio, 250);
-        this.balance = parseFloat(this.balance) - 10;
+        this.balance = parseFloat(this.balance)-parseFloat(this.betValue);
+
+        this.newBalance = this.balance;
+        this.updateBalance();
         
         for (let i = 0; i < this.doors.length; i++) {
           const door = this.doors[i];
@@ -284,6 +403,7 @@
     },
     mounted() {
       
+      this.balance = this.user.userbalance
       this.doors = document.querySelectorAll('.door');
       this.slotSound = document.getElementById('slotSound');
       this.loseSound = document.getElementById('loseSound');
@@ -293,7 +413,7 @@
 
     
   };
-  </script>
+</script>
   <style scoped>
   /* Estilos CSS específicos para este componente */
 
