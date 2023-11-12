@@ -26,7 +26,7 @@
 					CICERO BARRETO - 31051553
 				</v-col>
 				<v-col>
-					VINICIUS DE MIRANDA - ????????
+					VINICIUS DE MIRANDA - 29943183
 				</v-col>
 			</v-row>
 		</v-container>
