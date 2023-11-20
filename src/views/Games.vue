@@ -11,7 +11,7 @@
                 Roleta
               </v-card-title>
               <v-parallax
-                src="../assets/games imgs/roulette.jpg"
+                src="https://images2.imgbox.com/07/aa/c9QdV4d2_o.jpg"
               ></v-parallax>
               <v-spacer></v-spacer>
               <v-card-text class="d-flex flex-nowrap text-justify">
@@ -29,7 +29,7 @@
                 Jackpot
               </v-card-title>
               <v-parallax
-                src="../assets/games imgs/slot-machine.jpg"
+                src="https://images2.imgbox.com/c3/54/tavd2MV4_o.jpg"
               ></v-parallax>
               <v-card-text class="d-flex flex-nowrap text-justify">
                 No Jackpot você vai ter a verdadeira experiência de um cassino! (e de quebra ainda pode ganhar uma grana!) 
@@ -47,7 +47,7 @@
                 Configurações
               </v-card-title>
               <v-parallax
-                src="../assets/config.jpg"
+                src="https://images2.imgbox.com/b1/cb/eR2rJNSa_o.jpg"
               ></v-parallax>
               <v-card-text class="d-flex flex-nowrap text-justify">
                 Aqui você pode configurar o site para ficar do seu jeito! (ou não, você que sabe)
@@ -63,7 +63,7 @@
                 Informações
               </v-card-title>
               <v-parallax
-                src="../assets/info.jpg"
+                src="https://images2.imgbox.com/c5/5f/XefscBZU_o.jpg"
               ></v-parallax>
               <v-card-text class="d-flex flex-nowrap text-justify">
                 Aqui você pode ver as informações sobre o site e algo também sobre os criadores e responsáveis!

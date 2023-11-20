@@ -8,7 +8,7 @@
           <router-link to="/">
             <v-img
               width="200"
-              src="src/assets/logoSemFundoDeitada.png"
+              src="https://images2.imgbox.com/1d/27/SLRjRy02_o.png"
               class="mx-auto"
               
             >

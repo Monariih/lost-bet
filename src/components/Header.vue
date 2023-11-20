@@ -3,7 +3,7 @@
     <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
     <v-app-bar-title class="d-none d-sm-block">
       <router-link to="/games">
-        <v-img src="@/assets/logoSemFundoDeitada.png" width="200px"></v-img>
+        <v-img src="https://images2.imgbox.com/1d/27/SLRjRy02_o.png" width="200px"></v-img>
       </router-link>
     </v-app-bar-title>
     <v-spacer></v-spacer>
