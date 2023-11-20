@@ -18,7 +18,9 @@
                 Vem jogar na roleta e tentar a sorte! (Não nos resposabilizamos por vícios em ganhar dinheiro!)
               </v-card-text>
               <v-card-item class="d-flex justify-end">
-                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/games/roulette">Roleta</v-btn>
+                <router-link to="/roulette">
+                  <v-btn class="ma-1" elevation="2" color="#FF9900">Roleta</v-btn>
+                </router-link>
               </v-card-item>
             </v-card>
           </v-col>
@@ -35,7 +37,9 @@
                 No Jackpot você vai ter a verdadeira experiência de um cassino! (e de quebra ainda pode ganhar uma grana!) 
               </v-card-text>
               <v-card-item class="d-flex justify-end">
-                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/games/jackpot">Jackpot</v-btn>
+                <router-link  to="/jackpot">
+                  <v-btn class="ma-1" elevation="2" color="#FF9900">Jackpot</v-btn>
+                </router-link>
               </v-card-item>
             </v-card>
           </v-col>
@@ -53,7 +57,9 @@
                 Aqui você pode configurar o site para ficar do seu jeito! (ou não, você que sabe)
               </v-card-text>
               <v-card-item class="d-flex justify-end">
-                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/config">Configurações</v-btn>
+                <router-link to="/config">
+                  <v-btn class="ma-1" elevation="2" color="#FF9900">Configurações</v-btn>
+                </router-link>
               </v-card-item>
             </v-card>
           </v-col>
@@ -69,7 +75,9 @@
                 Aqui você pode ver as informações sobre o site e algo também sobre os criadores e responsáveis!
               </v-card-text>
               <v-card-item class="d-flex justify-end">
-                <v-btn class="ma-1" elevation="2" color="#FF9900" href="/info">Informações</v-btn>
+                <router-link to="/info">
+                  <v-btn class="ma-1" elevation="2" color="#FF9900">Informações</v-btn>
+                </router-link>  
               </v-card-item>
             </v-card>
           </v-col>

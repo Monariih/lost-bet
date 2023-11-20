@@ -57,13 +57,12 @@ const routes = [
         component: () => import('@/views/money-options/Deposit.vue'),
       },
       {
-        path: '/games/roulette',
+        path: '/roulette',
         name: 'Roulette',
         component: () => import('@/views/games/Roulette.vue'),
       },
-
       {
-        path: '/games/jackpot',
+        path: '/jackpot',
         name: 'Jackpot',
         component: () => import('@/views/games/Jackpot.vue'),
       },
