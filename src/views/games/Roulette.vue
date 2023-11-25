@@ -78,11 +78,12 @@
         <v-row>
           <v-col
             class="text-center"
-            ssm="12"
-            sm="8"
-            md="6"
-            lg="2"
-            offset-lg="5"
+            sm="10"
+            md="8"
+            lg="4"
+            offset-lg="4"
+            offset-md="2"
+            offset-sm="1"
           >
             <v-form>
               <br />
@@ -92,10 +93,11 @@
                 ref="inputBet"
                 type="number"
                 v-model="betValue"
+                variant="outlined"
                 label="Valor de aposta:"
                 :rules="rules"
                 hide-details="auto"
-                class="my-2 text-center bg-grey-darken-3 h-100 betValue"
+                class="my-2 bg-grey-darken-3 h-100 betValue"
               >
               </v-text-field>
             </v-form>
@@ -107,17 +109,18 @@
         <v-item-group mandatory>
           <v-container>
             <v-row>
-              <v-col v-for="(n, index) in 3" :key="n" cols="9" md="4">
+              <v-col 
+                v-for="(n, index) in 3" 
+                :key="n"
+              >
                 <v-item v-slot="{ isSelected, toggle }">
                   <v-card
                     :color="getButtonColor(n)"
-                    class="d-flex align-center"
-                    dark
-                    height="200"
+                    class="align-center"
                     @click="toggle(), handleButtonClick(n), cleanAlert()"
                   >
                     <v-scroll-y-transition>
-                      <div class="text-h3 flex-grow-1 text-center btnText">
+                      <div class="text-h4 flex-grow-1 text-center btnText">
                         {{ isSelected ? "Selecionado!" : buttonTexts[index] }}
                       </div>
                     </v-scroll-y-transition>
@@ -130,17 +133,16 @@
 
         <v-row>
           <v-col
-            class="text-center"
-            ssm="1"
-            sm="1"
-            md="8"
-            lg="13"
-            offset-lg="2"
-            offset-sm="1"
-            offset-md="1"
+          class="text-center"
+          sm="10"
+          md="8"
+          lg="4"
+          offset-lg="4"
+          offset-md="2"
+          offset-sm="1"
           >
             <v-btn
-              class="my-2 btnPlay"
+              class="my-2 btnPlay elevation-2"
               :disabled="playDisabled"
               @click="cleanAlert(), validateValue()"
               block
@@ -259,7 +261,7 @@ export default {
       ],
       selectedValue: null,
 
-      buttonTexts: ["Preto \n2X", "Verde \n14X", "Vermelho\n2X"],
+      buttonTexts: ["PRETO \n2X", "VERDE \n14X", "VERMELHO\n2X"],
       selectedValues: [],
       buttons: ["black", "green", "red"],
 
