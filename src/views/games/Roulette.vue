@@ -320,7 +320,6 @@ export default {
         this.selectedColor = "green";
       }
 
-      console.log(this.selectedColor);
     },
 
     getButtonColor(index) {
@@ -331,7 +330,6 @@ export default {
 
     onButtonClick(index) {
       this.selectedValues[index] = "Valor associado ao botão " + (index + 1);
-      console.log(this.selectedValues);
     },
 
     initWheel() {
@@ -363,7 +361,6 @@ export default {
     setOutcomeAndSpin() {
       // Set the outcome to the value entered in the input field
 
-      console.log(this.betValue);
       // this.outcome = parseInt(this.outcome);
       this.spinWheel();
       this.rouletteAudio();
@@ -462,7 +459,6 @@ export default {
         this.outcome === 11
       ) {
         this.cassinoColor = "red";
-        console.log(this.cassinoColor);
       } else if (
         this.outcome === 0 ||
         this.outcome === 5 ||
@@ -473,10 +469,8 @@ export default {
         this.outcome === 14
       ) {
         this.cassinoColor = "black";
-        console.log(this.cassinoColor);
       } else if (this.outcome === 1) {
         this.cassinoColor = "green";
-        console.log(this.cassinoColor);
       }
     },
 
