@@ -8,7 +8,7 @@ Lost-bet is currently hosted on various cloud services, such as:
 - Our frontend is hosted on Vercel.
 
 To access the application, simply create a user and log in!
-[https://www.lostbet.games/](https://www.lostbet.games/)
+[lostbet.games](https://www.lostbet.games)
 
 The application still has some issues and bugs, and I would be immensely grateful if you could be part of Lost-bet :)
 
@@ -80,12 +80,12 @@ sudo apt-get install npm -y
 
 - **AWS (RDS):** Hospedando o banco de dados MySQL.
 
-- **Heroku VirtualMachine:** Rodando a nossa API, que pode ser encontrada em [https://github.com/Monariih/lost-bet.api](https://github.com/Monariih/lost-bet.api).
+- **Heroku VirtualMachine:** Rodando a nossa API, que pode ser encontrada em [lost-bet.api](https://github.com/Monariih/lost-bet.api).
 
 - **Vercel:** Nosso frontend está hospedado no Vercel.
 
 Para entrar na aplicação, basta criar um usuário e fazer login! 
-[https://www.lostbet.games/](https://www.lostbet.games/)
+[lostbet.games](https://www.lostbet.games)
 
 A aplicação ainda contém alguns problemas e bugs. Ficaríamos imensamente gratos se você pudesse fazer parte da Lost-bet :)
 
