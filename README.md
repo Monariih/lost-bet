@@ -1,3 +1,17 @@
+# Lost-Bet is current online !
+
+**Lost-bet** está atualmente hospedada em diversos serviços de nuvem, tais como:
+
+- **AWS (RDS):** Hospedando o banco de dados MySQL.
+
+- **Heroku VirtualMachine:** Rodando a nossa API, que pode ser encontrada em [https://github.com/Monariih/lost-bet.api](https://github.com/Monariih/lost-bet.api).
+
+- **Vercel:** Nosso frontend está hospedado no Vercel.
+
+Para entrar na aplicação, basta criar um usuário e fazer login! [https://www.lostbet.games/](https://www.lostbet.games/)
+
+A aplicação ainda contém alguns problemas e bugs. Ficaríamos imensamente gratos se você pudesse fazer parte da Lost-bet :)
+
 # Lost-Bet Server Installation Guide for Ubuntu Server 20.04
 
 This guide provides step-by-step instructions for installing the Lost-Bet server on Ubuntu Server 20.04.
