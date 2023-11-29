@@ -3,7 +3,7 @@
 Lost-bet is currently hosted on various cloud services, such as:
 - AWS (RDS) hosting the MySQL database
   
-- Heroku VirtualMachine running our API, which can be found at [https://github.com/Monariih/lost-bet.api](lost-bet.api)
+- Heroku VirtualMachine running our API, which can be found at [lost-bet.api](https://github.com/Monariih/lost-bet.api)
   
 - Our frontend is hosted on Vercel.
 
