@@ -449,6 +449,9 @@ export default {
         }px, 0px, 0px)`;
         this.spinning = false;
       }, 6 * 1000);
+      setTimeout(() => {
+        this.playDisabled = false;
+      }, 5000);
     },
 
     resultColor() {
@@ -541,14 +544,6 @@ export default {
 
         this.outcome = Math.floor(Math.random() * 14);
       }, 6000);
-
-      setTimeout(
-        () => {
-          window.location.reload();
-        },
-
-        9000
-      );
     },
   },
 };
