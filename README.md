@@ -1,16 +1,17 @@
 # Lost-Bet is current online !
 
-**Lost-bet** está atualmente hospedada em diversos serviços de nuvem, tais como:
+Lost-bet is currently hosted on various cloud services, such as:
+- AWS (RDS) hosting the MySQL database
+  
+- Heroku VirtualMachine running our API, which can be found at [https://github.com/Monariih/lost-bet.api](https://github.com/Monariih/lost-bet.api)
+  
+- Our frontend is hosted on Vercel.
 
-- **AWS (RDS):** Hospedando o banco de dados MySQL.
+To access the application, simply create a user and log in!
+[https://www.lostbet.games/](https://www.lostbet.games/)
 
-- **Heroku VirtualMachine:** Rodando a nossa API, que pode ser encontrada em [https://github.com/Monariih/lost-bet.api](https://github.com/Monariih/lost-bet.api).
+The application still has some issues and bugs, and I would be immensely grateful if you could be part of Lost-bet :)
 
-- **Vercel:** Nosso frontend está hospedado no Vercel.
-
-Para entrar na aplicação, basta criar um usuário e fazer login! [https://www.lostbet.games/](https://www.lostbet.games/)
-
-A aplicação ainda contém alguns problemas e bugs. Ficaríamos imensamente gratos se você pudesse fazer parte da Lost-bet :)
 
 # Lost-Bet Server Installation Guide for Ubuntu Server 20.04
 
@@ -72,6 +73,21 @@ sudo apt-get install npm -y
       - On the line "port," define your TCP port.
 
 ## PORTUGUESE VERSION ##
+
+# Lost-Bet is current online !
+
+**Lost-bet** está atualmente hospedada em diversos serviços de nuvem, tais como:
+
+- **AWS (RDS):** Hospedando o banco de dados MySQL.
+
+- **Heroku VirtualMachine:** Rodando a nossa API, que pode ser encontrada em [https://github.com/Monariih/lost-bet.api](https://github.com/Monariih/lost-bet.api).
+
+- **Vercel:** Nosso frontend está hospedado no Vercel.
+
+Para entrar na aplicação, basta criar um usuário e fazer login! 
+[https://www.lostbet.games/](https://www.lostbet.games/)
+
+A aplicação ainda contém alguns problemas e bugs. Ficaríamos imensamente gratos se você pudesse fazer parte da Lost-bet :)
 
 # Guia de Instalação do Servidor Lost-Bet para Ubuntu Server 20.04
 
