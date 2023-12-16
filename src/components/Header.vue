@@ -36,12 +36,13 @@
 <script setup>
 import { ref } from 'vue'
 import router from '@/router'
+import store from '@/store'
 
-const user = ref(JSON.parse(localStorage.getItem('user')))
+const user = ref(store.state.user)
 const drawer = ref(null)
 
 function logout() {
-  localStorage.removeItem('user')
+  store.commit('logout')
   router.push('/')
 }
 </script>
