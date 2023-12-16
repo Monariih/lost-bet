@@ -152,6 +152,7 @@
 import Footer from '@/components/Footer.vue'
 import api from '@/configs/api'
 import router from '@/router'
+import store from '@/store';
 import { ref } from 'vue';
 
 const form = ref(false)
@@ -174,7 +175,7 @@ async function onSubmit () {
     if (response.data.userpassword === password.value){
       loading.value = true
       setTimeout(() => (loading.value = false), 2000)
-      localStorage.setItem('user', JSON.stringify(response.data))
+      store.commit('storeUser', response.data)
       router.push('/games')
       return response
     } else {
