@@ -152,14 +152,15 @@
 import Footer from '@/components/Footer.vue'
 import api from '@/configs/api'
 import router from '@/router'
+import { ref } from 'vue';
 
-export default {
-  components: {
-    Footer,
-  },
-  data: () => ({
-    form: false,
-    dialogError: false,
+const form = ref(false)
+const dialogError = ref(false)
+const userCpf = ref(null)
+const password = ref(null)
+const loading = ref(false)
+const visible = ref(false)
+const errorMsg = ref(null)
     userCpf: null,
     password: null,
     loading: false,
