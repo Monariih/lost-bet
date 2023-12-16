@@ -10,6 +10,10 @@ export default createStore({
         },
     },
     getters: {},
-    mutations: {},
+    mutations: {
+        storeUser(state, payload) {
+            state.user = payload;
+        },
+    },
     actions: {},
 });
