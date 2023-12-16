@@ -14,6 +14,9 @@ export default createStore({
         storeUser(state, payload) {
             state.user = payload;
         },
+        logout(state) {
+            state.user = null;
+        },
     },
     actions: {},
 });
