@@ -3,9 +3,9 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         user: {
-            username: "John Doe",
-            useremail: "teste@email.com",
-            userbalance: 157,
+            username: "Example name",
+            useremail: "example@email.com",
+            userbalance: 0,
             usercpf: "12345678999",
         },
     },
