@@ -162,282 +162,284 @@
 
 
 <script>
-  import api from '@/configs/api';
-  export default {
-    
-    data() {
-      return {
+import api from '@/configs/api';
+import store from '@/store';
+export default {
+  
+  data() {
+    return {
 
-         user: JSON.parse(localStorage.getItem('user')),
+      user: store.state.user,
 
-        items: [
-        '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
-        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
-        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
-        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
-        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
-        '💰', '💰', '💰', '💰', '💰', '💰', '💰','💰',
-        '💎', '💎', '💎', '💎','💎','💎',
-        '7', '7', '7', '7', '7', '7','7',
-         
-        ],
-        doors: null,
-        slotSound: null,
-        loseSound: null,
-        winSound: null,
+      items: [
+      '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
+      '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
+      '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
+      '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+      '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+      '💰', '💰', '💰', '💰', '💰', '💰', '💰','💰',
+      '💎', '💎', '💎', '💎','💎','💎',
+      '7', '7', '7', '7', '7', '7','7',
+        
+      ],
+      doors: null,
+      slotSound: null,
+      loseSound: null,
+      winSound: null,
 
-        playDisabled: false,
-        errorAlert1: false,
-        winAlert1: false,
-        loseAlert: false,
-        
-        betValue: 10,
-        
-        slot1: null,
-        slot2: null,
-        slot3: null,
-        
-        balance: 0,
-        newBalance:0,
-        
-      };
+      playDisabled: false,
+      errorAlert1: false,
+      winAlert1: false,
+      loseAlert: false,
+      
+      betValue: 10,
+      
+      slot1: null,
+      slot2: null,
+      slot3: null,
+      
+      balance: 0,
+      newBalance:0,
+      
+    };
+  },
+  methods: {
+    cleanAlert(){
+      this.errorAlert1 = false;
+      this.loseAlert = false;
+      this.winAlert1 = false;
+      
     },
-    methods: {
-      cleanAlert(){
-        this.errorAlert1 = false;
-        this.loseAlert = false;
-        this.winAlert1= false;
-      },
 
-      slotAudio() {
-        this.$refs.slotAudio.play();
-      },
-      winAudio() {
-        this.$refs.winAudio.play();
-      },
-      loseAudio() {
-        this.$refs.loseAudio.play();
-      },
+    slotAudio() {
+      this.$refs.slotAudio.play();
+    },
+    winAudio() {
+      this.$refs.winAudio.play();
+    },
+    loseAudio() {
+      this.$refs.loseAudio.play();
+    },
 
-      async updateBalance(){
+    async updateBalance(){
 
-        try {
-          const response = await api.put(`/v1/user/${this.user.usercpf}`, {
-            usercpf: this.user.usercpf,
-            username: this.user.username,
-            useremail: this.user.useremail,
-            userpassword: this.user.userpassword,
-            userbalance: this.newBalance,
-        })
-        .then((response) => {
-          localStorage.setItem('user', JSON.stringify(response.data));
-          
-        });
-        this.loading = false;
+      try {
+        const response = await api.put(`/v1/user/${this.user.usercpf}`, {
+          usercpf: this.user.usercpf,
+          username: this.user.username,
+          useremail: this.user.useremail,
+          userpassword: this.user.userpassword,
+          userbalance: this.newBalance,
+      })
+      .then((response) => {
+        store.commit('storeUser', response.data);
+      });
+      this.loading = false;
+      } catch (error) {
+      this.loading = false;
 
-        console.log(this.newBalance);
-        } catch (error) {
-        this.loading = false;
+      console.log(error);
+      }
 
-        console.log(error);
+
+    },
+
+    verifyRoundItems() {
+      if (this.slot1 === this.slot2 && this.slot2 === this.slot3) {
+
+        
+        if(this.slot1 ==='7'){
+
+          this.balance = parseFloat(this.balance)+ 1000;
+          this.winAlert1 = true;
+          this.winAudio();
         }
 
+        else if(this.slot1 ==='💎'){
 
-      },
-
-      verifyRoundItems() {
-        if (this.slot1 === this.slot2 && this.slot2 === this.slot3) {
-
-          
-          if(this.slot1 ==='7'){
-
-            this.balance = parseFloat(this.balance)+ 1000;
-            this.winAlert1 = true;
-            this.winAudio();
-          }
-
-          else if(this.slot1 ==='💎'){
-
-            this.balance = parseFloat(this.balance)+ 500;
-            this.winAlert1 = true;
-            this.winAudio();
-
-          }
-
-          else if(this.slot1 ==='💰'){
-            this.balance = parseFloat(this.balance)+ 250;
-            this.winAlert1 = true;
-            this.winAudio();
-          }
-
-          else if(this.slot1 ==='💵'){
-            this.balance = parseFloat(this.balance)+ 100;
-            this.winAlert1 = true;
-            this.winAudio();
-          }
-
-          else{
-
-            this.loseAlert=true;
-            this.loseAudio();
-
-          }
+          this.balance = parseFloat(this.balance)+ 500;
+          this.winAlert1 = true;
+          this.winAudio();
 
         }
 
-        else if(
-          this.slot1 ==='❌' || this.slot2 === '❌' || this.slot3 ==='❌' ||
-          this.slot1 ==='☠' || this.slot2 === '☠' || this.slot3 ==='☠' ){
+        else if(this.slot1 ==='💰'){
+          this.balance = parseFloat(this.balance)+ 250;
+          this.winAlert1 = true;
+          this.winAudio();
+        }
+
+        else if(this.slot1 ==='💵'){
+          this.balance = parseFloat(this.balance)+ 100;
+          this.winAlert1 = true;
+          this.winAudio();
+        }
+
+        else{
+
           this.loseAlert=true;
           this.loseAudio();
+
         }
 
-        else{
-            this.balance = parseFloat(this.balance)+ 30;
-            this.winAlert1 = true;
-            this.winAudio();
-        }
+      }
 
-        setTimeout(() =>{
-          window.location.reload();
-        },3000)
+      else if(
+        this.slot1 ==='❌' || this.slot2 === '❌' || this.slot3 ==='❌' ||
+        this.slot1 ==='☠' || this.slot2 === '☠' || this.slot3 ==='☠' ){
+        this.loseAlert=true;
+        this.loseAudio();
+      }
 
-        
-      },
+      else{
+          this.balance = parseFloat(this.balance)+ 30;
+          this.winAlert1 = true;
+          this.winAudio();
+      }
+
+      setTimeout(() =>{
+       ;
+      },3000)
+
       
-      init(groups = 1, duration = 1) {
-        for (const door of this.doors) {
-          door.dataset.spinned = '0';
-          const boxes = door.querySelector('.boxes');
-          const boxesClone = boxes.cloneNode(false);
-          const pool = ['❓'];
-          const arr = [];
-          for (let n = 0; n < (groups > 0 ? groups : 1); n++) {
-            arr.push(...this.items);
-          }
-          pool.push(...this.shuffle(arr));
-          boxesClone.addEventListener(
-            'transitionstart',
-            function () {
-              door.dataset.spinned = '1';
-              this.querySelectorAll('.box').forEach((box) => {
-                box.style.filter = 'blur(1px)';
-              });
-            },
-            { once: true }
-          );
-          boxesClone.addEventListener(
-            'transitionend',
-            function () {
-              this.querySelectorAll('.box').forEach((box, index) => {
-                box.style.filter = 'blur(0)';
-                if (index > 0) this.removeChild(box);
-              });
-            },
-            { once: true }
-          );
-          for (let i = pool.length - 1; i >= 0; i--) {
-            const box = document.createElement('div');
-            box.classList.add('box');
-            box.style.width = door.clientWidth + 'px';
-            box.style.height = door.clientHeight + 'px';
-            box.textContent = pool[i];
-            boxesClone.appendChild(box);
-          }
-          boxesClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
-          boxesClone.style.transform = `translateY(-${door.clientHeight * (pool.length - 1)}px)`;
-          door.replaceChild(boxesClone, boxes);
+    },
+    
+    init(groups = 1, duration = 1) {
+      for (const door of this.doors) {
+        door.dataset.spinned = '0';
+        const boxes = door.querySelector('.boxes');
+        const boxesClone = boxes.cloneNode(false);
+        const pool = ['❓'];
+        const arr = [];
+        for (let n = 0; n < (groups > 0 ? groups : 1); n++) {
+          arr.push(...this.items);
         }
-      },
+        pool.push(...this.shuffle(arr));
+        boxesClone.addEventListener(
+          'transitionstart',
+          function () {
+            door.dataset.spinned = '1';
+            this.querySelectorAll('.box').forEach((box) => {
+              box.style.filter = 'blur(1px)';
+            });
+          },
+          { once: true }
+        );
+        boxesClone.addEventListener(
+          'transitionend',
+          function () {
+            this.querySelectorAll('.box').forEach((box, index) => {
+              box.style.filter = 'blur(0)';
+              if (index > 0) this.removeChild(box);
+            });
+          },
+          { once: true }
+        );
+        for (let i = pool.length - 1; i >= 0; i--) {
+          const box = document.createElement('div');
+          box.classList.add('box');
+          box.style.width = door.clientWidth + 'px';
+          box.style.height = door.clientHeight + 'px';
+          box.textContent = pool[i];
+          boxesClone.appendChild(box);
+        }
+        boxesClone.style.transitionDuration = `${duration > 0 ? duration : 1}s`;
+        boxesClone.style.transform = `translateY(-${door.clientHeight * (pool.length - 1)}px)`;
+        door.replaceChild(boxesClone, boxes);
+      }
+    },
 
-      validateValue(){
+    validateValue(){
 
-        if(this.balance<10){
-          this.errorAlert1 = true;
-          setTimeout(() => {
-          this.errorAlert1 = false;
+      if(this.balance<10){
+        this.errorAlert1 = true;
+        setTimeout(() => {
+        this.errorAlert1 = false;
+      }, 3000);
+      }
+
+      else{
+        this.cleanAlert();
+        this.spin();
+        this.playDisabled = true;
+        setTimeout(() => { 
+          this.playDisabled = false;
         }, 3000);
-        }
-
-        else{
-          this.cleanAlert();
-          this.spin();
-          this.playDisabled = true;
-        }
-      },
-
-      async spin() {
-
-        this.init(1, 2);
-        setTimeout(this.slotAudio, 250);
-        this.balance = parseFloat(this.balance)-parseFloat(this.betValue);
-
-        this.newBalance = this.balance;
-        this.updateBalance();
-        
-        for (let i = 0; i < this.doors.length; i++) {
-          const door = this.doors[i];
-          const boxes = door.querySelector('.boxes');
-          const duration = parseInt(boxes.style.transitionDuration);
-          boxes.style.transform = 'translateY(0)';
-          await new Promise((resolve) => setTimeout(resolve, duration * 100));
-          const currentValue = door.querySelector('.box').textContent;
-          if (i === 0) {
-            this.slot1 = currentValue;
-          } else if (i === 1) {
-            this.slot2 = currentValue;
-          } else if (i === 2) {
-            this.slot3 = currentValue;
-          }
-        }
-        setTimeout(this.verifyRoundItems, 1750);
-      },
-      shuffle([...arr]) {
-        let m = arr.length;
-        while (m) {
-          const i = Math.floor(Math.random() * m--);
-          [arr[m], arr[i]] = [arr[i], arr[m]];
-        }
-        return arr;
-      },
-    },
-    mounted() {
-      
-      this.balance = this.user.userbalance
-      this.doors = document.querySelectorAll('.door');
-      this.slotSound = document.getElementById('slotSound');
-      this.loseSound = document.getElementById('loseSound');
-      this.winSound = document.getElementById('winSound');
-      
+      }
     },
 
-    
-  };
-</script>
-  <style scoped>
-  /* Estilos CSS específicos para este componente */
+    async spin() {
 
-  body {
-    font-family: 'Titillium Web', sans-serif;
-    padding: 15px
-    
-  }
+      this.init(1, 2);
+      setTimeout(this.slotAudio, 250);
+      this.balance = parseFloat(this.balance)-parseFloat(this.betValue);
 
-   
-  #app {
-    border-radius: 15px;
-    height: 550px;
-    width: 550px;
-    background-color:#161616;;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+      this.newBalance = this.balance;
+      this.updateBalance();
+      
+      for (let i = 0; i < this.doors.length; i++) {
+        const door = this.doors[i];
+        const boxes = door.querySelector('.boxes');
+        const duration = parseInt(boxes.style.transitionDuration);
+        boxes.style.transform = 'translateY(0)';
+        await new Promise((resolve) => setTimeout(resolve, duration * 100));
+        const currentValue = door.querySelector('.box').textContent;
+        if (i === 0) {
+          this.slot1 = currentValue;
+        } else if (i === 1) {
+          this.slot2 = currentValue;
+        } else if (i === 2) {
+          this.slot3 = currentValue;
+        }
+      }
+      setTimeout(this.verifyRoundItems, 1750);
+    },
+    shuffle([...arr]) {
+      let m = arr.length;
+      while (m) {
+        const i = Math.floor(Math.random() * m--);
+        [arr[m], arr[i]] = [arr[i], arr[m]];
+      }
+      return arr;
+    },
+  },
+  mounted() {
     
-  }
+    this.balance = this.user.userbalance
+    this.doors = document.querySelectorAll('.door');
+    this.slotSound = document.getElementById('slotSound');
+    this.loseSound = document.getElementById('loseSound');
+    this.winSound = document.getElementById('winSound');
+    
+  },
+
   
-  </style>
+};
+</script>
+<style scoped>
+/* Estilos CSS específicos para este componente */
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  padding: 15px
+  
+}
+
+  
+#app {
+  border-radius: 15px;
+  height: 550px;
+  width: 550px;
+  background-color:#161616;;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  
+}
+
+</style>
 
 <style src="@/styles/jackpotStyle.css"></style>
   

@@ -147,61 +147,56 @@
     </v-card>
   </v-dialog>
 </template>
-<script>
+
+<script setup>
 import Footer from '@/components/Footer.vue'
 import api from '@/configs/api'
 import router from '@/router'
+import store from '@/store';
+import { ref } from 'vue';
 
-export default {
-  components: {
-    Footer,
-  },
-  data: () => ({
-    form: false,
-    dialogError: false,
-    userCpf: null,
-    password: null,
-    loading: false,
-    visible: false,
-    errorMsg: null,
-  }),
+const form = ref(false)
+const dialogError = ref(false)
+const userCpf = ref(null)
+const password = ref(null)
+const loading = ref(false)
+const visible = ref(false)
+const errorMsg = ref(null)
 
-  methods: {
-    async onSubmit () {
-      if (!this.form) return
+async function onSubmit () {
+  if (!form) return
 
-      const response = await api.get(`/v1/user/${this.userCpf}`, {
-        usercpf: this.userCpf,
-        userpassword: this.password,
-      })
+  const response = await api.get(`/v1/user/${userCpf.value}`, {
+    usercpf: userCpf.value,
+    userpassword: password.value,
+  })
 
-      .then((response) => {
-        if (response.data.userpassword === this.password){
-          this.loading = true
-          setTimeout(() => (this.loading = false), 2000)
-          localStorage.setItem('user', JSON.stringify(response.data))
-          router.push('/games')
-          return response
-        } else {
-          this.errorMsg = "Senha incorreta"
-          this.dialogError = true
-          this.loading = true
-          setTimeout(() => (this.loading = false), 2000)
-          return response
-        }
-      })
-      .catch((error) => {
-        this.errorMsg = "Usuário não encontrado"
-        this.dialogError = true
-        this.loading = true
-        setTimeout(() => (this.loading = false), 2000)
-        return error
-      })
-
-    },
-    required (v) {
-      return !!v || 'Field is required'
-    },
-  },
+  .then((response) => {
+    if (response.data.userpassword === password.value){
+      loading.value = true
+      setTimeout(() => (loading.value = false), 2000)
+      store.commit('storeUser', response.data)
+      router.push('/games')
+      return response
+    } else {
+      errorMsg.value = "Senha incorreta"
+      dialogError.value = true
+      loading.value = true
+      setTimeout(() => (loading.value = false), 2000)
+      return response
+    }
+  })
+  .catch((error) => {
+    errorMsg.value = "Usuário não encontrado"
+    dialogError.value = true
+    loading.value = true
+    setTimeout(() => (loading.value = false), 2000)
+    return error
+  })
 }
+
+function required (v) {
+  return !!v || 'Field is required'
+}
+
 </script>

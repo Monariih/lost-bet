@@ -229,11 +229,11 @@
   </v-app>
 </template>
 
-<script setup></script>
-
 <script>
 import api from "@/configs/api";
 import Header from "@/components/Header.vue";
+import store from '@/store';
+
 export default {
   components: {
     Header,
@@ -241,8 +241,7 @@ export default {
 
   data() {
     return {
-      user: JSON.parse(localStorage.getItem("user")),
-
+      user: store.state.user,
       errorAlert1: false,
       errorAlert2: false,
       errorAlert3: false,
@@ -446,6 +445,9 @@ export default {
         }px, 0px, 0px)`;
         this.spinning = false;
       }, 6 * 1000);
+      setTimeout(() => {
+        this.playDisabled = false;
+      }, 5000);
     },
 
     resultColor() {
@@ -485,10 +487,10 @@ export default {
             userbalance: this.newBalance,
           })
           .then((response) => {
-            localStorage.setItem("user", JSON.stringify(response.data));
+            store.commit('storeUser', response.data);
           });
         this.loading = false;
-
+        console.log(store.state.user)
         console.log(this.newBalance);
       } catch (error) {
         this.loading = false;
@@ -535,14 +537,6 @@ export default {
 
         this.outcome = Math.floor(Math.random() * 14);
       }, 6000);
-
-      setTimeout(
-        () => {
-          window.location.reload();
-        },
-
-        9000
-      );
     },
   },
 };
