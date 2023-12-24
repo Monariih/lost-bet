@@ -229,8 +229,6 @@
   </v-app>
 </template>
 
-<script setup></script>
-
 <script>
 import api from "@/configs/api";
 import Header from "@/components/Header.vue";
