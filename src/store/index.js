@@ -1,10 +1,17 @@
 import { createStore } from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
+function initialState() {
+  user = localStorage.getItem("user")
+  return {
+		user: user ? JSON.parse(user) : null,
+  };
+}
+
 export default createStore({
-    state: {
-        user: {
-            username: "Example name",
+  state: {
+		initialState,
+  },
             useremail: "example@email.com",
             userbalance: 0,
             usercpf: "12345678999",
