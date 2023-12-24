@@ -232,6 +232,8 @@
 <script>
 import api from "@/configs/api";
 import Header from "@/components/Header.vue";
+import store from '@/store';
+
 export default {
   components: {
     Header,
@@ -239,8 +241,7 @@ export default {
 
   data() {
     return {
-      user: JSON.parse(localStorage.getItem("user")),
-
+      user: store.state.user,
       errorAlert1: false,
       errorAlert2: false,
       errorAlert3: false,

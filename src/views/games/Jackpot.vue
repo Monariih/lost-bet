@@ -163,12 +163,13 @@
 
 <script>
   import api from '@/configs/api';
+import store from '@/store';
   export default {
     
     data() {
       return {
 
-         user: JSON.parse(localStorage.getItem('user')),
+      user: store.state.user,
 
         items: [
         '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
@@ -221,26 +222,23 @@
 
       async updateBalance(){
 
-        try {
-          const response = await api.put(`/v1/user/${this.user.usercpf}`, {
-            usercpf: this.user.usercpf,
-            username: this.user.username,
-            useremail: this.user.useremail,
-            userpassword: this.user.userpassword,
-            userbalance: this.newBalance,
-        })
-        .then((response) => {
-          localStorage.setItem('user', JSON.stringify(response.data));
-          
-        });
-        this.loading = false;
+      try {
+        const response = await api.put(`/v1/user/${this.user.usercpf}`, {
+          usercpf: this.user.usercpf,
+          username: this.user.username,
+          useremail: this.user.useremail,
+          userpassword: this.user.userpassword,
+          userbalance: this.newBalance,
+      })
+      .then((response) => {
+        store.commit('storeUser', response.data);
+      });
+      this.loading = false;
+      } catch (error) {
+      this.loading = false;
 
-        console.log(this.newBalance);
-        } catch (error) {
-        this.loading = false;
-
-        console.log(error);
-        }
+      console.log(error);
+      }
 
 
       },
