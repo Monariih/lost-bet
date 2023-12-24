@@ -162,65 +162,66 @@
 
 
 <script>
-  import api from '@/configs/api';
+import api from '@/configs/api';
 import store from '@/store';
-  export default {
-    
-    data() {
-      return {
+export default {
+  
+  data() {
+    return {
 
       user: store.state.user,
 
-        items: [
-        '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
-        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
-        '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
-        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
-        '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
-        '💰', '💰', '💰', '💰', '💰', '💰', '💰','💰',
-        '💎', '💎', '💎', '💎','💎','💎',
-        '7', '7', '7', '7', '7', '7','7',
-         
-        ],
-        doors: null,
-        slotSound: null,
-        loseSound: null,
-        winSound: null,
+      items: [
+      '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠', '☠',
+      '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
+      '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌', '❌',
+      '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+      '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', '💵', 
+      '💰', '💰', '💰', '💰', '💰', '💰', '💰','💰',
+      '💎', '💎', '💎', '💎','💎','💎',
+      '7', '7', '7', '7', '7', '7','7',
+        
+      ],
+      doors: null,
+      slotSound: null,
+      loseSound: null,
+      winSound: null,
 
-        playDisabled: false,
-        errorAlert1: false,
-        winAlert1: false,
-        loseAlert: false,
-        
-        betValue: 10,
-        
-        slot1: null,
-        slot2: null,
-        slot3: null,
-        
-        balance: 0,
-        newBalance:0,
-        
-      };
+      playDisabled: false,
+      errorAlert1: false,
+      winAlert1: false,
+      loseAlert: false,
+      
+      betValue: 10,
+      
+      slot1: null,
+      slot2: null,
+      slot3: null,
+      
+      balance: 0,
+      newBalance:0,
+      
+    };
+  },
+  methods: {
+    cleanAlert(){
+      this.errorAlert1 = false;
+      this.loseAlert = false;
+      this.winAlert1 = false;
+      
     },
-    methods: {
-      cleanAlert(){
-        this.errorAlert1 = false;
-        this.loseAlert = false;
-        this.winAlert1= false;
-      },
 
-      slotAudio() {
-        this.$refs.slotAudio.play();
-      },
-      winAudio() {
-        this.$refs.winAudio.play();
-      },
-      loseAudio() {
-        this.$refs.loseAudio.play();
-      },
+    slotAudio() {
+      this.$refs.slotAudio.play();
+    },
+    winAudio() {
+      this.$refs.winAudio.play();
+    },
+    loseAudio() {
+      this.$refs.loseAudio.play();
+    },
 
-      async updateBalance(){
+    async updateBalance(){
 
       try {
         const response = await api.put(`/v1/user/${this.user.usercpf}`, {
