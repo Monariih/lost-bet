@@ -34,11 +34,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import router from '@/router'
 import store from '@/store'
 
-const user = ref(store.state.user)
+const user = reactive(store.state.user)
 const drawer = ref(null)
 
 function logout() {
