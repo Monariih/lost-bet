@@ -73,8 +73,9 @@
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header.vue';
 import api from '@/configs/api';
+import store from '@/store';
 
-export default {
+const user = store.state.user;
 	components: {
 		Footer,
 		Header,
@@ -103,7 +104,7 @@ export default {
 					userbalance: this.newBalance,
 				})
 				.then((response) => {
-					localStorage.setItem('user', JSON.stringify(response.data));
+			store.commit('storeUser', response.data);
 					this.$router.push('/games');
 				});
 				this.loading = false;
