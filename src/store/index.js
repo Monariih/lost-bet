@@ -12,25 +12,25 @@ export default createStore({
   state: {
 		initialState,
   },
-            useremail: "example@email.com",
-            userbalance: 0,
-            usercpf: "12345678999",
-        },
+  getters: {
+    user: (state) => state.user,
+  },
+  mutations: {
+    storeUser(state, payload) {
+      state.user = payload;
+      localStorage.setItem("user", JSON.stringify(payload));
     },
-    getters: {},
-    mutations: {
-        storeUser(state, payload) {
-            state.user = payload;
-        },
-        logout(state) {
-            state.user = null;
-        },
+    logout(state) {
+      state.user = null;
+      localStorage.removeItem("user");
     },
-    actions: {},
+  },
+  actions: {},
   plugins: [createPersistedState({
     storage: {
       getItem: (key) => localStorage.getItem(key),
       setItem: (key, value) => localStorage.setItem(key, value),
       removeItem: (key) => localStorage.removeItem(key),
     }
+  })],
 });
