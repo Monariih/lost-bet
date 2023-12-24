@@ -493,10 +493,10 @@ export default {
             userbalance: this.newBalance,
           })
           .then((response) => {
-            localStorage.setItem("user", JSON.stringify(response.data));
+            store.commit('storeUser', response.data);
           });
         this.loading = false;
-
+        console.log(store.state.user)
         console.log(this.newBalance);
       } catch (error) {
         this.loading = false;
