@@ -69,59 +69,49 @@
 <Footer />
 </template>
 
-<script>
+<script setup>
 import Footer from '@/components/Footer.vue';
 import Header from '@/components/Header.vue';
 import api from '@/configs/api';
 import store from '@/store';
+import { ref } from 'vue';
+import router from '@/router';
 
 const user = store.state.user;
-	components: {
-		Footer,
-		Header,
-	},
-	data: () => ({
-		user: JSON.parse(localStorage.getItem('user')),
-		form: false,
-		loading: false,
-		value: null,
-		newBalance: null,
-	}),
-	created() {
-		console.log(this.user);
-	},
-	methods: {
-		async deposit() {
-			this.loading = true;
-			this.form = false;
-			this.newBalance = parseFloat(this.user.userbalance) - parseFloat(this.value);
-			try {
-				const response = await api.put(`/v1/user/${this.user.usercpf}`, {
-					usercpf: this.user.usercpf,
-					username: this.user.username,
-					useremail: this.user.useremail,
-					userpassword: this.user.userpassword,
-					userbalance: this.newBalance,
-				})
-				.then((response) => {
+const form = ref(false);
+const loading = ref(false);
+const value = ref(null);
+const newBalance = ref(null);
+
+function required(v) {
+	return !!v || 'Campo obrigatório';
+}
+
+async function onSubmit() {
+	if (!form) return;
+	loading.value = true;
+	form.value = false;
+	newBalance.value = parseFloat(user.userbalance) - parseFloat(value.value);
+	try {
+		const response = await api.put(`/v1/user/${user.usercpf}`, {
+			usercpf: user.usercpf,
+			username: user.username,
+			useremail: user.useremail,
+			userpassword: user.userpassword,
+			userbalance: newBalance.value,
+		})
+		.then((response) => {
 			store.commit('storeUser', response.data);
-					this.$router.push('/games');
-				});
-				this.loading = false;
-				this.form = true;
-				console.log(response);
-			} catch (error) {
-				this.loading = false;
-				this.form = true;
-				console.log(error);
-			}
-		},
-		onSubmit() {
-			this.deposit();
-		},
-		required(v) {
-			return !!v || 'Campo obrigatório';
-		},
+			router.push('/games');
+		});
+		loading.value = false;
+		form.value = true;
+		console.log(response);
+	} catch (error) {
+		loading.value = false;
+		form.value = true;
+		console.log(error);
 	}
-};
+}
+
 </script>
